@@ -1,32 +1,45 @@
+import java.util.Date;
 /**
  * Punya Abdu Halim Wibowo 1306447392
  * Modul1
  */
 public class Bank
 {
-    private static double creditInterestRate;
-	private static String closeTime;
-	private static double investmentInterestRate;
-	private static int lastCustID;
-	private static int nextCustID;
-	private static String phone;
-	private static double premiumInterestRate;
-	private static String startTime;
+   private static double cInterestRate;
+    private static Date ctime;
+    private static double iInterestRate;
+    private static int lastCustID;
+    private static int nextCustID;
+    private static String phone;
+    private static double pInterestRate;
+    private static Date stime;
+	private static int numOfCurrentCustomer;
+    private static int nextID;
 	public static String website;
-	public static String bankAddress = "1234 JavaStreet, AnyCity, ThisState, 34567";
+	public static String Address = "1234 JavaStreet, AnyCity, ThisState, 34567";
 	public static int maxNumOfCustomers = 20;
-	public static String bankName = "JBANK";
+	public static int maxNumOfAcctPerCustomer = 4;
+	public static String Name = "JBANK";
+	
 
+	/**
+     * Method untuk constructor Bank
+     */
+    private Bank()
+    {
+        
+    }
+    
 	/**
 	 * mendapatkan alamat bank
 	 */
-	public static String getAddress()
+	/*public static String getAddress()
 	{
 	    String getAddress = "";
 	    
 		return getAddress;
 	}
-	
+	*/
 	/**
 	 * mendapatkan credit rate dalam desimal
 	 */
@@ -64,28 +77,54 @@ public class Bank
 	/**
 	 * mendapatkan jumlah maksimum customer bank
 	 */
-	public static int getMaxCustomer()
-	{
-		return 0;
-	}
-	
+	/*public static int getMaxCustomer()
+    {
+        return 0;
+    }*/
+    
+    
 	/**
 	 * mendapatkan nama bank
 	 */
-	public static String getName()
-	{
-	    String getName = "";
-	    
-		return getName;
-	}
+	  /*public static String getName()
+    {
+        String getName = "";
+        
+        return getName;
+    }*/
 	
+	/**
+     * Metode accessor mendapat jumlah customer sekarang 
+     * @return jumlah customer
+     */
+    public static int getNumOfCurrentCustomer()
+    {
+        return numOfCurrentCustomer;
+    }
+    
 	/**
 	 * mendapatkan nomor ID selanjutnya
 	 */
 	public static int getNextID()
 	{
-		return 0;
-	}
+        if(nextCustID == 0) {
+            nextCustID = 1000;
+            lastCustID = 1000;
+            numOfCurrentCustomer++;
+            
+            return nextCustID;
+        }
+        else if(numOfCurrentCustomer == maxNumOfCustomers) {
+            return 0;
+        }
+        else {
+            lastCustID = nextCustID;
+            nextCustID = lastCustID + 1;
+            numOfCurrentCustomer++;
+            
+            return nextCustID;
+        }
+    }
 	
 	/**
 	 * mendapatkan alamat website bank
@@ -98,8 +137,8 @@ public class Bank
 	}
 	
 	/**
-	 * Method untuk mendapatkan premium rate dalam desimal
-	 * @return suku bunga premium dalam desimal
+	 * Metode mendapatkan premium rate 
+	 * @return suku bunga premium rate 
 	 */
 	public static double getPremiumRate()
 	{
@@ -107,7 +146,7 @@ public class Bank
 	}
 	
 	/**
-	 * Method untuk mendapatkan nomor telpon bank
+	 * Metode untuk mendapatkan nomor telpon 
 	 * @return no telpon
 	 */
 	public static String getPhone()
@@ -118,7 +157,8 @@ public class Bank
 	}
 	
 	/**
-	 * Method untuk menentukan besar credit rate akhir
+	 * Metode menentukan besar credit rate akhir
+	 * @param rate persen suku bunga
 	 */
 	public static void setCreditRate(double rate)
 	{
@@ -127,6 +167,7 @@ public class Bank
 	
 	/**
 	 * menentukan besar investment rate akhir
+	 * @param rate persen investasi 
 	 */
 	public static void setInvestmentRate(double rate)
 	{
@@ -135,6 +176,7 @@ public class Bank
 	
 	/**
 	 * menentukan besar premium rate akhir
+	 * @param rate persen suku bunga premium
 	 */
 	public static void setPremium(double rate)
 	{

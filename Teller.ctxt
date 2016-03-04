@@ -4,5 +4,5 @@ comment0.target=void\ main(java.lang.String[])
 comment0.text=\r\n\ Main\ function\r\n
 comment1.params=
 comment1.target=Teller()
-comment1.text=\r\n\ Method\ untuk\ teller\r\n
+comment1.text=\r\n\ Method\ Constructor\ Teller\r\n
 numComments=2

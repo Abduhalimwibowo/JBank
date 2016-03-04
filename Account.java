@@ -1,6 +1,6 @@
 /**
- * Punya Abdu Halim Wibowo 1306447392
- * Modul1
+ * @author Abdu Halim Wibowo 1306447392
+ * @modul3
  */
 public class Account
 {
@@ -9,33 +9,43 @@ public class Account
 	private String id;
 	
 	/**
-	 * Metode untuk mengubah data akun
+	 * Method untuk mengubah data akun
 	 */
 	public Account()
 	{
-		
+		acctType = 'S';
+        balance = 10.00;
 	}
 	
 	/**
 	 * mengubah data akun
-	 * @param type tipe akun amount jumlah uang dalam akun
+	 * @param tipe akun 
+	 * @param jumlah uang akun
 	 */
 	public Account(char type, double amount)
 	{
-		
+		acctType = type;
+		balance = amount; 
 	}
 	
 	/**
-	 * melakukan deposit
-	 * @param amount jumlah uang yang akan disimpan
-	 */
-	private void deposit(double amount)
-	{
-		
-	}
+     * Method untuk melakukan deposit
+     * @param amount jumlah uang disimpan
+     */
+    public boolean deposit(double amount)
+    {
+        if(amount < 0) {
+            return false;
+        }
+        else {
+            balance += amount;
+            return true;
+        }
+    }
 	
 	/**
 	 * Metodemendapatkan tipe akun
+	 * @return type akun
 	 */
 	public char getAcctType()
 	{
@@ -44,6 +54,7 @@ public class Account
 	
 	/**
 	 * mendapatkan jumlah uang dalam akun
+	 * @return balance
 	 */
 	public double getBalance()
 	{
@@ -52,6 +63,7 @@ public class Account
 	
 	/**
 	 * mendapatkan ID akun
+	 * @return id
 	 */
 	public String getId()
 	{ 
@@ -60,6 +72,7 @@ public class Account
 	
 	/**
 	 * menset jumlah uang kedalam akun
+	 * @param amount
 	 */
 	public void setBalance(double amount)
 	{
@@ -67,7 +80,8 @@ public class Account
 	}
 	
 	/**
-	 * menset no ID pada akun
+	 * metode menset no ID pada akun
+	 * @param id dan acctId
 	 */
 	public void setID(String acctId)
 	{
@@ -76,6 +90,7 @@ public class Account
 	
 	/**
 	 * Metode untuk menset tipe akun
+	 * @param tipe akun
 	 */
 	public void setAcctType(char type)
 	{
@@ -83,10 +98,17 @@ public class Account
 	}
 	
 	/**
-	 * melakukan pengambilan uang
-	 */
-	public void withdraw(double amount)
-	{
-		
-	}
+     * Method untuk melakukan penarikan uang
+     * @param amount jumlah uang diambil
+     */
+	public boolean withdraw(double amount)
+    {
+        if(balance-amount < 0) {
+            return false;
+        }
+        else {
+            balance -= amount;
+            return true;
+        }
+    }
 }
