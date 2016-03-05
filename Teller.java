@@ -14,6 +14,7 @@ public class Teller
      */
     public static void main(String[] args)
     {
+        /*modul2*/ 
         /*Customer c1 = new Customer(); //Membuat object customer dengan nama c1
         c1.setName("Sanadhi", "Sutandi"); //Mengganti nama c1 jadi Sanadhi Sutandi
         System.out.println(c1.getName()); //Menampilkan output c1
