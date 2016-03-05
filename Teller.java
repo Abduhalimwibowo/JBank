@@ -26,7 +26,7 @@ public class Teller
         
         do {
             Scanner scan = new Scanner(System.in);
-            System.out.println("Apakah anda mau menjadi customer? (y/n) ");
+            System.out.println("Apakah saudara mau menjadi customer kami? (y/n) ");
             String choice = scan.nextLine();
             
             if(choice.equalsIgnoreCase("y")) {
