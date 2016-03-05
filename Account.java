@@ -1,6 +1,6 @@
 /**
  * @author Abdu Halim Wibowo 1306447392
- * @modul3
+ * @version Modul3
  */
 public class Account
 {

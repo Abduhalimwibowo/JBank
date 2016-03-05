@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 import java.util.Date;
 /**
  *@author Abdu Halim Wibowo 1306447392
- *@Modul3
+ *@version Modul3
  */
 public class Customer
 

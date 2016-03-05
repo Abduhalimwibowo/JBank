@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.lang.Character;
 /**
  *@author Abdu Halim Wibowo 1306447392
- *@Modul3
+ *@version Modul3
  */
 public class Teller
 {
@@ -17,11 +17,9 @@ public class Teller
         /*Customer c1 = new Customer(); //Membuat object customer dengan nama c1
         c1.setName("Sanadhi", "Sutandi"); //Mengganti nama c1 jadi Sanadhi Sutandi
         System.out.println(c1.getName()); //Menampilkan output c1
-        
         Account a1 = new Account(), account; //Membuat object account dengan nama a1 dengan variabel account menjadi referensinya
         a1.setBalance(1000000); //Mengubah nilai saldo pada a1
-        
-        c1.setAccount(a1); //mengassign object dari account a1 ke accountc1
+        c1.setAccount(a1); //mengassign object dari account a1 ke account c1
         account = c1.getAccount(); //Mengambil dan menyimpan data pada Account a1 ke variabel account
         System.out.println(account.getBalance()); //Menampilkan jumlah saldo dengan variabel account*/
         
@@ -43,7 +41,7 @@ public class Teller
                     System.out.println("Isikan nomor telepon: ");
                     String phone = scan.nextLine();
                     
-                    System.out.println("Isikan tipe akun yang diinginkan (S/O/I/L/T): ");
+                    System.out.println("Isikan tipe akun yang saudara inginkan (S/O/I/L/T): ");
                     System.out.println("S = Saving\nO = Overdraft\nI = Investment\nL = Line of Credit Checking\nT = Tidak membuat");
                     char type = scan.next().charAt(0);
                     char acctType = Character.toUpperCase(type);
@@ -62,8 +60,8 @@ public class Teller
                     
                         System.out.println("Informasi Akun");
                         System.out.println("Nama        : " + c1.getName());
-                        System.out.println("No Telepon  : " + c1.getPhone());
                         System.out.println("ID Customer : " + c1.getCustID());
+                        System.out.println("No Telepon  : " + c1.getPhone());
                         System.out.println("Tipe Akun   : " + a1.getAcctType());
                         System.out.println("Saldo       : " + a1.getBalance());
                     }

@@ -1,7 +1,7 @@
 import java.util.Date;
 /**
  * Punya Abdu Halim Wibowo 1306447392
- * Modul1
+ * @version Modul3
  */
 public class Bank
 {
