@@ -1,6 +1,6 @@
 /**
  * @author Abdu Halim Wibowo 1306447392
- * @version Modul3
+ * @version Modul4
  */
 public class Account
 {
@@ -32,7 +32,7 @@ public class Account
      * Method untuk melakukan deposit
      * @param amount jumlah uang disimpan
      */
-    public boolean deposit(double amount)
+    public boolean deposite(double amount)
     {
         if(amount < 0) {
             return false;

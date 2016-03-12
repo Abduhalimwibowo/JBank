@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 import java.util.Date;
 /**
  *@author Abdu Halim Wibowo 1306447392
- *@version Modul3
+ *@version Modul4
  */
 public class Customer
 
@@ -57,6 +57,12 @@ public class Customer
         this.DOB = DOB;
         this.custID = Bank.getNextID();
     }
+    
+    public Date getDOB()
+    {
+        return DOB;
+    }
+
     
     /**
      * Mandapatkan alamat

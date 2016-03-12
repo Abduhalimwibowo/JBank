@@ -1,18 +1,23 @@
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 /**
  * Punya Abdu Halim Wibowo 1306447392
- * @version Modul3
+ * @version Modul4
  */
 public class Bank
 {
    private static double cInterestRate;
-    private static Date ctime;
+    private static Date startTime;
     private static double iInterestRate;
     private static int lastCustID;
     private static int nextCustID;
     private static String phone;
     private static double pInterestRate;
-    private static Date stime;
+    private static Date closeTime;
 	private static int numOfCurrentCustomer;
     private static int nextID;
 	public static String website;
@@ -20,12 +25,13 @@ public class Bank
 	public static int maxNumOfCustomers = 20;
 	public static int maxNumOfAcctPerCustomer = 4;
 	public static String Name = "JBANK";
+	private static BigDecimal cRate, iRate, pRate;
 	
 
 	/**
      * Method untuk constructor Bank
      */
-    private Bank()
+    public Bank()
     {
         
     }
@@ -61,9 +67,18 @@ public class Bank
 	 */
 	public static String getHoursOfOperation()
 	{
-	    String getHoursOfOperation = "";
-	    
-		return getHoursOfOperation;
+	    Calendar start = new GregorianCalendar();
+        start.set(Calendar.DAY_OF_WEEK, 2);
+        start.set(Calendar.HOUR_OF_DAY, 9);
+        start.set(Calendar.MINUTE, 0);
+        Date startTime = start.getTime();
+        Calendar close = new GregorianCalendar();
+        close.set(Calendar.DAY_OF_WEEK, 6);
+        close.set(Calendar.HOUR_OF_DAY, 17);
+        close.set(Calendar.MINUTE, 0);
+        Date closeTime = close.getTime();
+	    SimpleDateFormat startclose = new SimpleDateFormat("k:mm");
+		return startclose.format(startTime) + "TO" + startclose.format(closeTime);
 	}
 	
 	/**
@@ -182,4 +197,25 @@ public class Bank
 	{
 		
 	}
+	
+	public static Date getStartTime()
+    {
+        return startTime;
+    }
+    
+    public static Date getCloseTime()
+    {
+        return closeTime;
+    }
+    
+    public static void setStartTime(Date hour, Date min)
+    {
+
+    }
+    
+    public static void setCloseTime(Date hour, Date min)
+    {
+
+    }
+    
 }
