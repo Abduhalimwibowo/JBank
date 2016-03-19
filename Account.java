@@ -1,114 +1,104 @@
 /**
- * @author Abdu Halim Wibowo 1306447392
- * @version Modul4
+ * @author Abdu Halim Wibowo 
+ * @version 19 Maret 2016
  */
 public class Account
 {
     private char acctType;
-	private double balance;
-	private String id;
-	
-	/**
-	 * Method untuk mengubah data akun
-	 */
-	public Account()
-	{
-		acctType = 'S';
-        balance = 10.00;
-	}
-	
-	/**
-	 * mengubah data akun
-	 * @param tipe akun 
-	 * @param jumlah uang akun
-	 */
-	public Account(char type, double amount)
-	{
-		acctType = type;
-		balance = amount; 
-	}
-	
-	/**
-     * Method untuk melakukan deposit
-     * @param amount jumlah uang disimpan
+    private double balance;
+    private String ID;
+    
+    /**
+     * Method Constructor Account
+     * @param type Tipe dari Akun
+     * @param amount Jumlah Nilai Kas
      */
-    public boolean deposite(double amount)
-    {
-        if(amount < 0) {
+    public Account(Customer cust, double amount, char type) {
+        acctType = type;
+        balance = amount;
+        ID = cust.getCustID()+ "" + type;
+    }
+    
+    public String toString() {
+        System.out.println("Account Type  :   " + acctType);
+        System.out.println("ID            :   " + ID);
+        System.out.println("Balance       :   " + balance);
+        return "";
+    }
+    
+    /**
+     * Method deposit 
+     * @param amount Jumlah Kas
+     */
+    public boolean deposit(double amount) {
+        if (amount < 0) {
             return false;
-        }
-        else {
+        } else {
             balance += amount;
             return true;
-        }
+        }   
     }
-	
-	/**
-	 * Metodemendapatkan tipe akun
-	 * @return type akun
-	 */
-	public char getAcctType()
-	{
-		return acctType;
-	}
-	
-	/**
-	 * mendapatkan jumlah uang dalam akun
-	 * @return balance
-	 */
-	public double getBalance()
-	{
-		return balance;
-	}
-	
-	/**
-	 * mendapatkan ID akun
-	 * @return id
-	 */
-	public String getId()
-	{ 
-	   return id;
-	}
-	
-	/**
-	 * menset jumlah uang kedalam akun
-	 * @param amount
-	 */
-	public void setBalance(double amount)
-	{
-		balance = amount;
-	}
-	
-	/**
-	 * metode menset no ID pada akun
-	 * @param id dan acctId
-	 */
-	public void setID(String acctId)
-	{
-		id = acctId;
-	}
-	
-	/**
-	 * Metode untuk menset tipe akun
-	 * @param tipe akun
-	 */
-	public void setAcctType(char type)
-	{
-		acctType = type;
-	}
-	
-	/**
-     * Method untuk melakukan penarikan uang
-     * @param amount jumlah uang diambil
+    
+    /**
+     * Method getAcctType 
+     * @return Nama tipe akun
      */
-	public boolean withdraw(double amount)
-    {
-        if(balance-amount < 0) {
+    public char getAcctType() {
+        return acctType;
+    }
+    
+    /**
+     * Method getBalance 
+     * @return Jumlah uang/balance 
+     */
+    public double getBalance() {
+        return balance;
+    }
+    
+    /**
+     * Method getId 
+     * @return ID dari akun 
+     */
+    public String getID() {
+        return ID;
+    }
+    
+    /**
+     * Method setBalance 
+     * @param amount Jumlah Kas 
+     */
+    public void setBalance(double amount) {
+        balance = amount;
+    }
+    
+    /**
+     * Method setID Menentukan nama ID dari sebuah akun
+     * @param acctID Nama ID Account
+     */
+    /*
+    public void setID(String acctId) {
+        ID = acctId;
+    }*/
+    
+    /**
+     * Method setAcctType 
+     * @param type Akun pelanggan
+     */
+    public void setAcctType(char type) {
+        acctType = type;
+    }
+    
+    /**
+     * Method withdraw 
+     * @param amount Jumlah Kas
+     */
+    public boolean withdraw(double amount) {
+        if (balance-amount < 0) {
             return false;
-        }
-        else {
+        } else {
             balance -= amount;
             return true;
         }
     }
+   
 }
