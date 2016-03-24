@@ -119,17 +119,15 @@ public class Teller
                 }
             }
             else if(choice.equalsIgnoreCase("n")) {
-                System.out.println("Terima kasih telah menggunakan program JBank");
+                System.out.println("Terima kasih telah menggunakan JBank");
                 System.exit(0);
             }
             else if(choice.equalsIgnoreCase("s")) {
-                System.out.println("Masukkan ID kostumer untuk dicari: ");
+                System.out.println("Masukkan ID kostumer untuk dicari IDnya: ");
                 int custID = scan.nextInt();
                 String found = "Customer ditemukan";
-                String notfound = "Customer tidak ditemukan";
-                
+                String notfound = "Customer tidak dapat ditemukan"; 
                 String result = bank.getCustomer(custID) != null? found : notfound;
-                
                 System.out.println(result);
             }
             /*else if(choice.equalsIgnoreCase("a")) {
@@ -149,7 +147,7 @@ public class Teller
     }
     
     /**
-     * Modul 4 no 3
+     * 
      */
     /*public static void main() 
     {
@@ -174,13 +172,13 @@ public class Teller
         BigDecimal ri2 = new BigDecimal(.07); //tingkat suku bunga invest 12 bulan
         BigDecimal rl = new BigDecimal(.18); //tingkat rate creditline
         
-        //balance saving
+        
         BigDecimal f1S = rs.divide(nd, mc).add(new BigDecimal(1.0));
         BigDecimal f2S = nd.multiply(t1, mc);
         BigDecimal f3S = new BigDecimal(Math.pow(f1S.doubleValue(), f2S.doubleValue()), mc);
         BigDecimal balanceS = f3S.multiply(balS, mc);
         
-        //balance invest 6 bulan pertama
+        
         BigDecimal f1I6 = ri1.divide(nm, mc).add(new BigDecimal(1.0));
         BigDecimal f2I6 = nm.multiply(t2, mc);
         BigDecimal f3I6 = new BigDecimal(Math.pow(f1I6.doubleValue(), f2I6.doubleValue()), mc);
@@ -191,7 +189,7 @@ public class Teller
         BigDecimal f3I = new BigDecimal(Math.pow(f1I.doubleValue(), f2I.doubleValue()), mc);
         BigDecimal balanceI = f3I.multiply(balanceI6, mc);
         
-        //balance creditline
+        
         BigDecimal f1L = rl.divide(nd, mc).add(new BigDecimal(1.0));
         BigDecimal f2L = nd.multiply(t1, mc);
         BigDecimal f3L = new BigDecimal(Math.pow(f1L.doubleValue(), f2L.doubleValue()), mc);

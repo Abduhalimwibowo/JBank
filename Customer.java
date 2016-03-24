@@ -2,7 +2,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Date;
 /**
- * Kelas ini akan menghasilkan Object Customer yang memodelkan nasabah bank
  * @author Abdu Halim Wibowo
  * @version 19 maret 2016
  */

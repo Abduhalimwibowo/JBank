@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.lang.Integer;
 import java.io.Console;
 /**
- * Kelas ini memodelkan suatu bank
  * @author Abdu Halim Wibowo
  * @version 19 maret 2016
  */
@@ -15,15 +14,15 @@ public class Bank
     private static double cInterestRate;
     private static Date startTime;
     private static Date closeTime;
-    private static double iInterestRate;
     private static int lastCustID;
     private static int nextCustID;
+    private static double iInterestRate;
     private static String phone;
     private static double pInterestRate;
     private static int numOfCurrentCustomers;
     private static int nextID;
-    public static String website;
     public static String Address = "1234 JavaStreet, AnyCity, ThisState, 34567";
+    public static String website;
     public static String Name = "JBANK";
     public static int maxNumOfAcctPerCustomer = 4;
     private static int MAX_NUM_OF_CUSTOMERS;

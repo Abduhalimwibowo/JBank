@@ -1,6 +1,4 @@
 /**
- * Kelas ini akan menghasilkan Object Account yang memodelkan 
- * akun bank
  * @author Abdu Halim Wibowo
  * @version 19 maret 2016
  */
