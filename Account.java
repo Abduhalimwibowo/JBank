@@ -1,6 +1,8 @@
 /**
- * @author Abdu Halim Wibowo 
- * @version 19 Maret 2016
+ * Kelas ini akan menghasilkan Object Account yang memodelkan 
+ * akun bank
+ * @author Abdu Halim Wibowo
+ * @version 19 maret 2016
  */
 public class Account
 {
@@ -9,96 +11,90 @@ public class Account
     private String ID;
     
     /**
-     * Method Constructor Account
-     * @param type Tipe dari Akun
-     * @param amount Jumlah Nilai Kas
+     * Metode Constructor Account
+     * @param customer kostumer bank 
+     * @param amount jumlah uang dalam akun
+     * @param type tipe akun
      */
-    public Account(Customer cust, double amount, char type) {
-        acctType = type;
-        balance = amount;
-        ID = cust.getCustID()+ "" + type;
-    }
-    
-    public String toString() {
-        System.out.println("Account Type  :   " + acctType);
-        System.out.println("ID            :   " + ID);
-        System.out.println("Balance       :   " + balance);
-        return "";
+    public Account(Customer cust, double amount, char type)
+    {
+        this.balance = amount;
+        this.acctType = type;
+        this.ID = Integer.toString(cust.getCustID()) + Character.toString(type);
     }
     
     /**
-     * Method deposit 
-     * @param amount Jumlah Kas
+     * Metode untuk melakukan deposit
+     * @param amount jumlah uang yang akan disimpan
      */
-    public boolean deposit(double amount) {
-        if (amount < 0) {
+    public boolean deposit(double amount)
+    {
+        if(amount < 0) {
             return false;
-        } else {
+        }
+        else {
             balance += amount;
             return true;
-        }   
+        }
     }
     
     /**
-     * Method getAcctType 
-     * @return Nama tipe akun
+     * Metode accessor untuk mendapatkan tipe akun
+     * @return tipe akun
      */
-    public char getAcctType() {
+    public char getAcctType()
+    {
         return acctType;
     }
     
     /**
-     * Method getBalance 
-     * @return Jumlah uang/balance 
+     * Metode accessor untuk mendapatkan jumlah uang dalam akun
+     * @return jumlah uang
      */
-    public double getBalance() {
+    public double getBalance()
+    {
         return balance;
     }
     
     /**
-     * Method getId 
-     * @return ID dari akun 
+     * Metode accessor untuk mendapatkan ID akun
+     * @return ID
      */
-    public String getID() {
+    public String getId()
+    {
         return ID;
     }
     
     /**
-     * Method setBalance 
-     * @param amount Jumlah Kas 
+     * Metode mutator untuk mengeset jumlah uang kedalam akun
+     * @param amount jumlah uang
      */
-    public void setBalance(double amount) {
-        balance = amount;
+    public void setBalance(double amount)
+    {
+        this.balance = amount;
     }
     
     /**
-     * Method setID Menentukan nama ID dari sebuah akun
-     * @param acctID Nama ID Account
+     * Metode mutator untuk mengeset tipe akun
+     * @param type tipe akun
      */
-    /*
-    public void setID(String acctId) {
-        ID = acctId;
-    }*/
-    
-    /**
-     * Method setAcctType 
-     * @param type Akun pelanggan
-     */
-    public void setAcctType(char type) {
-        acctType = type;
+    public void setAcctType(char type)
+    {
+        this.acctType = type;
     }
     
     /**
-     * Method withdraw 
-     * @param amount Jumlah Kas
+     * Metode untuk melakukan pengambilan uang
+     * @param amount jumlah uang yang akan diambil
      */
-    public boolean withdraw(double amount) {
-        if (balance-amount < 0) {
+    public boolean withdraw(double amount)
+    {
+        if(balance-amount < 0) {
             return false;
-        } else {
+        }
+        else {
             balance -= amount;
             return true;
         }
     }
-   
 }

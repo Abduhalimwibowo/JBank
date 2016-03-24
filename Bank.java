@@ -1,269 +1,290 @@
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.time.Duration;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.lang.Integer;
+import java.io.Console;
 /**
- * @author Abdu Halim Wibowo 
- * @version 19 Maret 2016
+ * Kelas ini memodelkan suatu bank
+ * @author Abdu Halim Wibowo
+ * @version 19 maret 2016
  */
-
-
 public class Bank
 {
-    private static double creditInterestRate, investmentInterestRate,premiumInterestRate;
-    private static BigDecimal cRate, iRate,pRate;
-    private static int lastCustID, nextCustID = 0, numOfCurrentCustomers = 0, nextID;
-    public static int MAX_NUM_OF_CUSTOMERS, maxNumofAcctsPerCustomer = 4;
-    private static Date closeTime = null, startTime = null; 
-    public static String phone, website, NAME= "JBANK", ADDRESS = "1234 JavaStreet, AnyCity, ThisState, 34567";
+    private static double cInterestRate;
+    private static Date startTime;
+    private static Date closeTime;
+    private static double iInterestRate;
+    private static int lastCustID;
+    private static int nextCustID;
+    private static String phone;
+    private static double pInterestRate;
+    private static int numOfCurrentCustomers;
+    private static int nextID;
+    public static String website;
+    public static String Address = "1234 JavaStreet, AnyCity, ThisState, 34567";
+    public static String Name = "JBANK";
+    public static int maxNumOfAcctPerCustomer = 4;
+    private static int MAX_NUM_OF_CUSTOMERS;
     static {
-        Scanner s = new Scanner(System.in);
-        System.out.print("\nEnter the maximum costumer: ");
-        int x= s.nextInt();
-        MAX_NUM_OF_CUSTOMERS = x;
+        Scanner scan = new Scanner(System.in);
+        System.out.printf("Masukkan jumlah maksimum kostumer: ");
+        int input = scan.nextInt();
+        MAX_NUM_OF_CUSTOMERS = input;
     }
-    private static Customer[] Customers = new Customer[MAX_NUM_OF_CUSTOMERS];
+    private static Customer[] customers = new Customer[MAX_NUM_OF_CUSTOMERS];
 
-    public Bank() {
+    /**
+     * Method constructor Bank
+     */
+    public Bank()
+    {
+        
     }
     
-    /**
-     * Method getAddress
-     */
-    /*
-    public static String getAddress() {
-        return Address;
-    }*/
-    public void setMax() {
-
-    }
-    
-    /**
-     * Method addCustomer Menambahkan objek customer ke array Customers
-     * @param customer Objek dari kelas Customer
-     * @return True atau False
-     */
-    public static boolean addCustomer (Customer customer) {
-        for (int i = 0; i < Customers.length; i++){
-            if (Customers[i] == null) {
-                Customers[i] = customer;
-                return true;
-            } 
+    public static boolean addCustomer(Customer customer)
+    {
+        boolean customerAdded = false;
+        int i = 0;
+        if(numOfCurrentCustomers <= customers.length) {
+            int notUsed = -1;
+            for(i = 0; i < customers.length; i++) {
+                if(customers[i] == null && notUsed == -1) {
+                    notUsed = i;
+                }
+                else {
+                    customerAdded = false;
+                }
+            }
+            if(notUsed != -1) {
+                customers[notUsed] = customer;
+                System.out.println("Kostumer berhasil ditambahkan");
+                customerAdded = true;
+            }
         }
-        return false;
+        return customerAdded;
     }
     
-    /**
-     * Method getCustomer 
-     * @param custID Customer ID
-     * @return Objek Customer atau Null
-     */
-    public static Customer getCustomer (int custID) {
-        for (int i = 0; i < Customers.length; i++){
-            if (Customers[i].getCustID() == custID) {
-                return Customers[i];
-            } 
+    public static Customer getCustomer(int custID) {
+        int i = 0;
+        for(i = 0; i < customers.length; i++) {
+            Customer c = customers[i];
+            if(c != null && custID == c.getCustID()) {
+                return c;
+            }
         }
         return null;
     }
     
-    /**
-     * Method getMaxNumOfCustomers 
-     * @return Jumlah maksimum customer
-     */
-    public static int getMaxNumOfCustomers () {
+    public static int getMaxNumOfCustomers() {
         return MAX_NUM_OF_CUSTOMERS;
     }
-
-    /**
-     * Method getCreditRate 
-     * @return Rasio Bunga Kredit
-     */
-    public static double getCreditRate() {
-        return creditInterestRate;
-    }
     
     /**
-     * Method getInvestmentRate 
-     * @return Ratio Bunga Investasi
+     * Method accessor untuk mendapatkan alamat bank
+     * @return alamat bank
      */
-    public static double getInvestmentRate() {
-        return investmentInterestRate;
-    }
-    
-    /**
-     * Method getPremiumRate 
-     * @return Ratio Bunga Premium
-     */
-    public static double getPremiumRate() {
-        return premiumInterestRate;
-    }
-    
-    
-    /**
-     * Method getHoursOfOperation 
-     */
-    public static String getHoursOfOperation() {
+    /*public static String getAddress()
+    {
+        String getAddress = "";
         
-        SimpleDateFormat ft= new SimpleDateFormat("hh:mm a");
-        return "test";
-        //return new Date(closeTime.getTime() - startTime.getTime()); 
-    }
+        return getAddress;
+    }*/
     
     /**
-     * Method getLastID Mendapatkan nomor pelanggan sebelumnya
+     * Method accessor untuk mendapatkan credit rate dalam desimal
+     * @return suku bunga dalam desimal
      */
-    public static int getLastID() {
+    public static double getCreditRate()
+    {
         return 0;
     }
     
     /**
-     * Method getMaxCustomers
+     * Method accessor untuk mendapatkan investment rate dalam desimal
+     * @return besar tingkat investasi dalam desimal
      */
-    /*
-    public static int getMaxCustomers() {
-        return maxNumOfCustomers;
+    public static double getInvestmentRate()
+    {
+        return 0;
+    }
+    
+    /**
+     * Method accessor untuk mendapatkan waktu kerja bank
+     * @return waktu kerja
+     */
+    public static String getHoursOfOperation()
+    {
+        Calendar start = new GregorianCalendar();
+        start.set(Calendar.DAY_OF_WEEK, 2);
+        start.set(Calendar.HOUR_OF_DAY, 9);
+        start.set(Calendar.MINUTE, 0);
+        startTime = start.getTime();
+        Calendar close = new GregorianCalendar();
+        close.set(Calendar.DAY_OF_WEEK, 6);
+        close.set(Calendar.HOUR_OF_DAY, 17);
+        close.set(Calendar.MINUTE, 0);
+        closeTime = close.getTime();
+
+        SimpleDateFormat hour = new SimpleDateFormat("k:mm");
+        SimpleDateFormat day = new SimpleDateFormat("EEE");
+        
+        String openclose = day.format(startTime) + " TO " + day.format(closeTime) + " " + hour.format(startTime) + " TO " + hour.format(closeTime);
+        
+        return openclose;
+    }
+    
+    /**
+     * Method accessor untuk mendapatkan nomor ID terakhir
+     * @return no ID terakhir
+     */
+    public static int getLastID()
+    {
+        return 0;
+    }
+    
+    /**
+     * Method accessor untuk mendapatkan jumlah maksimum nasabah bank
+     * @return jumlah maksimum nasabah
+     */
+    /*public static int getMaxCustomer()
+    {
+        return 0;
     }*/
     
     /**
-     * Method getNumOfCurrentCustomers Mendapatkan jumlah pelanggan sekarang
-     * @return Jumlah pelanggan Saat Ini
+     * Method accessor untuk mendapatkan nama bank
+     * @return nama bank
+       */
+    /*public static String getName()
+    {
+        String getName = "";
+        
+        return getName;
+    }*/
+    
+    /**
+     * Method accessor untuk mendapatkan jumlah customer saat ini
+     * @return jumlah customer
      */
-    public static int getNumOfCurrentCustomers() {
+    public static int getNumOfCurrentCustomer()
+    {
         return numOfCurrentCustomers;
     }
     
-    
     /**
-     * Method getName
+     * Method accessor untuk mendapatkan nomor ID selanjutnya
+     * @return no ID selanjutnya
      */
-    /*
-    public static String getName() {
-        return Name;
-    }*/
-    
-    /**
-     * Method getNextID Mendapatkan nomor pelanggan berikutnya. Jika jumlah pelanggan
-     * sekarang sama dengan jumlah pelanggan maksimum atau total maka penomoran akan di ulang.
-     * @return Nomor ID selanjutnya
-     */
-    public static int getNextID() {
-        int nextID;
-        if (numOfCurrentCustomers == MAX_NUM_OF_CUSTOMERS) {
-            nextID = 0;
-            nextCustID = nextID;
-        } else {
-            if (nextCustID == 0)  {
-                lastCustID = 1000;
-                nextID = 1000;
-                nextCustID = nextID;
-            }else {
-                lastCustID = nextCustID;
-                nextID = lastCustID + 1;
-                nextCustID = nextID;
-            }
+    public static int getNextID()
+    {
+        if(nextCustID == 0) {
+            nextCustID = 1000;
+            lastCustID = 1000;
             numOfCurrentCustomers++;
+            
+            return nextCustID;
         }
-        return nextID;
-    }
-    
-    
-    /**
-     * Method getWebsite 
-     * @return Alamat Website
-     */
-    public static String getWebsite() {
-        return website;
-    }
-    
-
-    /**
-     * Method getPhone 
-     * @return Nomor Handphone
-     */
-    public static String getPhone() {
-        return phone;
+        else if(numOfCurrentCustomers == MAX_NUM_OF_CUSTOMERS) {
+            return 0;
+        }
+        else {
+            lastCustID = nextCustID;
+            nextCustID = lastCustID + 1;
+            numOfCurrentCustomers++;
+            
+            return nextCustID;
+        }
     }
     
     /**
-     * Method getCloseTime 
-     * @return Waktu tutup
+     * Method accessor untuk mendapatkan alamat website bank
+     * @return url website
      */
-    public static Date getCloseTime() {
-        return closeTime;
+    public static String getWebsite()
+    {
+        String getWebsite = "";
+        
+        return getWebsite;
     }
-   
+    
     /**
-     * Method getStartTime
-     * @return Waktu buka
+     * Method accessor untuk mendapatkan premium rate dalam desimal
+     * @return suku bunga premium dalam desimal
      */
-    public static Date getStartTime() {
+    public static double getPremiumRate()
+    {
+        return 0;
+    }
+    
+    /**
+     * Method accessor untuk mendapatkan nomor telpon bank
+     * @return no telpon
+     */
+    public static String getPhone()
+    {
+        String getPhone = "";
+        
+        return getPhone;
+    }
+    
+    /**
+     * Method untuk mendapatkan waktu buka bank
+     */
+    public static Date getStartTime()
+    {
         return startTime;
     }
     
     /**
-     * Method setCreditRate 
-     * @param rate Rasio Kredit
+     * Method untuk mendapatkan waktu tutup bank
      */
-    public static void setCreditRate(double rate) {
+    public static Date getCloseTime()
+    {
+        return closeTime;
     }
     
     /**
-     * Method setInvestmentRate 
-     * @param rate Rasio Investment
+     * Method untuk mengatur waktu buka bank
      */
-    public static void setInvestmentRate(double rate) {
-    }
-    
-    /**
-     * Method setPremium 
-     * @param rate Rasio Kredit
-     */
-    public static void setPremium(double rate) {
-    }
-    
-    /**
-     * Method setCloseTime 
-     * @param hour Satuan Jam
-     * @param min Satuan Menit
-     */
-    public static void setCloseTime(int hour, int min) {
-        closeTime = new GregorianCalendar(0,0,0,hour, min).getTime();
-    }
-   
-    /**
-     * Method setStartTime 
-     * @param hour Satuan Jam
-     * @param min Satuan Menit
-     */
-    public static void setStartTime(int hour, int min) {
-        startTime = new GregorianCalendar(0,0,0,hour, min).getTime();
-    }
-    
-    /**
-     * Method setHoursOfOperation 
-     * @return True atau False
-     */
+    public static void setStartTime(Date hour, Date min)
+    {
 
-    public boolean setHoursOfOperation(Date startTime, Date closeTime) {
-        if (this.startTime != null || this.closeTime != null) {
-            startTime = this.startTime;
-            closeTime = this.closeTime;
-            return true;
-        } else {
-            startTime = this.startTime;
-            closeTime = this.closeTime;
-            return false;
-        }
     }
     
-    public void printAllCustomers() {
-        for (Customer c : Customers) {
-            if (c!=null)
-                System.out.println(c);
-        }
+    /**
+     * Method untuk mengatur waktu tutup bank
+     */
+    public static void setCloseTime(Date hour, Date min)
+    {
+
+    }
+    
+    /**
+     * Method mutator untuk menentukan besar credit rate akhir
+     * @param rate persen suku bunga dalam desimal
+     */
+    public static void setCreditRate(double rate)
+    {
+        
+    }
+    
+    /**
+     * Method mutator untuk menentukan besar investment rate akhir
+     * @param rate persen tingkat investasi dalam desimal
+     */
+    public static void setInvestmentRate(double rate)
+    {
+        
+    }
+    
+    /**
+     * Method mutator untuk menentukan besar premium rate akhir
+     * @param rate persen suku bunga premium dalam desimal
+     */
+    public static void setPremium(double rate)
+    {
+        
     }
 }
