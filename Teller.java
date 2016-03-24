@@ -28,7 +28,7 @@ public class Teller
         
         do {
             Scanner scan = new Scanner(System.in);
-            System.out.println("y = yes\nn = no\ns = search");
+            System.out.println("y = iya\nn = tidak\ns = cari");
             System.out.println("Apakah anda ingin menjadi nasabah? (y/n/s) ");
             String choice = scan.nextLine();
             
@@ -102,11 +102,11 @@ public class Teller
                         
                         System.out.println("Informasi Akun");
                         System.out.println("Nama            : " + c1.getName());
+                        System.out.println("ID Customer     : " + a1.getId());
                         System.out.println("DOB             : " + dobFormat.format(c1.getDOB()));
                         System.out.println("No Telepon      : " + c1.getPhone());
-                        System.out.println("Email           : " + c1.getEmail());
                         System.out.println("Address         : " + c1.getAddress());
-                        System.out.println("ID Customer     : " + a1.getId());
+                        System.out.println("Email           : " + c1.getEmail());
                         System.out.println("Tipe Akun       : " + a1.getAcctType());
                         System.out.println("Saldo           : " + a1.getBalance());
                         System.out.println("Jam Operasional : " + bank.getHoursOfOperation());
