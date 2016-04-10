@@ -1,23 +1,22 @@
 #BlueJ class context
 comment0.params=
 comment0.target=java.lang.String\ toString()
-comment0.text=\r\n\ Method\ Constructor\ Account\r\n\ @param\ type\ Tipe\ dari\ Akun\r\n\ @param\ amount\ Jumlah\ Nilai\ Kas\r\n\ \ \ \ public\ Account(Customer\ cust,\ double\ amount,\ char\ type)\ {\r\n\ \ \ \ \ \ \ \ acctType\ \=\ type;\r\n\ \ \ \ \ \ \ \ balance\ \=\ amount;\r\n\ \ \ \ \ \ \ \ ID\ \=\ cust.getCustID()+\ ""\ +\ type;\r\n}
+comment0.text=\r\n\ \ \ \ public\ Account(Customer\ customer,double\ amount,char\ tipe)\r\n\ \ \ \ {\r\n\ \ \ \ \ \ \ \ acctType\ \=\ tipe;\r\n\ \ \ \ \ \ \ \ balance\ \=\ amount;\r\n\ \ \ \ \ \ \ \ id\ \=\ customer.getCustID()+"\ "+\ tipe;\r\n\ \ \ \ }\r\n
 comment1.params=amount
 comment1.target=boolean\ deposit(double)
-comment1.text=\r\n\ Method\ deposit\ untuk\ mendeposit\ atau\ menambahkan\ sejumlah\ uang\ ke\ akun\ yang\ bersangkutan\r\n\ @param\ amount\ Jumlah\ Nilai\ Kas\r\n
+comment1.text=\r\n\ method\ untuk\ deposit\ customer\r\n\ @param\ amount\ nilai\ balance\ akun\ customer\ \r\n
 comment2.params=
-comment2.target=java.lang.String\ getID()
-comment2.text=\r\n\ Method\ getId\ Mendapatkan\ nomor\r\n\ @return\ ID\ dari\ akun\ yang\ bersangkutan\r\n
-comment3.params=amount
-comment3.target=void\ setBalance(double)
-comment3.text=\r\n\ Method\ setBalance\ Menentukan\ jumlah\ uang/balance\ pada\ suatu\ akun\ \r\n\ @param\ amount\ Jumlah\ Nilai\ Kas\ yang\ akan\ \r\n
-comment4.params=
-comment4.target=double\ getBalance()
-comment4.text=\r\n\ Method\ getBalance\ Menunjukk\ jumlah\ saldo\ pada\ suatu\ akun\ \r\n
-comment5.params=balance\ rate\ compound\ period
-comment5.target=double\ futureValue(double,\ double,\ double,\ double)
-comment5.text=\r\n\ Method\ futureValue\ Menghitung\ jumlah\ saldo\ setelah\ dibungakan\ sesuai\ dengan\ Compounded\ Interest\ Rate\ Formula\ \r\n\ @param\ balance\ Saldo\ awal\r\n\ @param\ rate\ Suku\ bunga\r\n\ @param\ compound\ Perhitungan\ penambahan\ bunga\ per\ satuan\ waktu\r\n\ @param\ period\ Periode\ satuan\ waktu\r\n
-comment6.params=amount
-comment6.target=boolean\ withdraw(double)
-comment6.text=\r\n\ Method\ withdraw\ Mengambil\ sejumlah\ uang\ dari\ suatu\ akun\ \r\n\ @param\ amount\ Jumlah\ Nilai\ Kas\r\n
+comment2.target=double\ getBalance()
+comment2.text=\r\n\ method\ untuk\ mendapatkan\ nilai\ balance\ customer\r\n\ @return\ nilai\ balance\r\n
+comment3.params=
+comment3.target=java.lang.String\ getId()
+comment3.text=\r\n\ method\ untuk\ mendapatkan\ ID\ customer\r\n\ @return\ no\ id\ customer\r\n
+comment4.params=amount
+comment4.target=void\ setBalance(double)
+comment4.text=\r\n\ method\ untuk\ assign\ nilai\ balance\ customer\r\n\ @param\ amount\ nilai\ deposit\ customer\r\n
+comment5.params=amount
+comment5.target=boolean\ withdraw(double)
+comment5.text=\r\n\ method\ untuk\ customer\ mengambil\ uang\r\n
+comment6.params=saldo\ rate\ compound\ period
+comment6.target=double\ nilai(double,\ double,\ double,\ double)
 numComments=7

@@ -1,28 +1,28 @@
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.math.BigDecimal;
-import java.math.MathContext;
+import java.text.*;
+import java.util.*;
+import java.io.*;
+import java.time.*;
+import java.lang.Math;
+import java.math.*;
 
 /**
- * Kelas Abstrak LineOfCredit merupakan extended kelas dari Checking Account. Kelas ini 
- * yang memberikan Limit untuk penarikan melebihi jumlah saldo pada Saving Account
+ * Kelas untuk membuat Account Line of Credit
  * @author Abdu Halim Wibowo
- * @version 27 maret 2016
+ * @version 2016.04.10
  */
 public class LineOfCredit extends Checking {
-    private double creditBalance, creditLimit;
+    private double creditBalance;
+    private double creditLimit;
     
     /**
      * Method Constructor LineOfCredit 
-     * @param cust Obyek Customer acuan
+     * @param cust Objek Customer 
      * @param amount Jumlah Saldo Checking Account
      * @param creditAmount Jumlah nilai limit kredit
      */
     public LineOfCredit (Customer cust, double amount, double creditAmount) {
         super();
-        ID = Integer.toString(cust.getCustID());
+        id = Double.toString(cust.getCustID());
         balance = amount;
         creditBalance = creditAmount;
         creditLimit = creditAmount;
@@ -32,22 +32,23 @@ public class LineOfCredit extends Checking {
      * Method feeAssessment Perhitungan biaya kredit
      */
     public void feeAssessment() {
-        int days = new GregorianCalendar ().get(Calendar.DAY_OF_MONTH);
-        double deficit = creditLimit - creditBalance, period = (double) days/365; 
-        double financeCharge = futureValue(deficit,0.21,360,period);
-        monthlyFee = new BigDecimal(financeCharge).subtract(new BigDecimal(deficit), mc.DECIMAL32).doubleValue();
+        int day = new GregorianCalendar().get(Calendar.DAY_OF_MONTH);
+        double def = creditLimit - creditBalance, 
+        periode = (double) day/365; 
+        double f = nilai(def,0.21,360,periode);
+        monthlyFee = new BigDecimal(f).subtract(new BigDecimal(def), mc.DECIMAL32).doubleValue();
     }
     
     /**
-     * Method withdraw Menarik sejumlah Saldo dari Line-of-Credit Account
-     * @param amount Jumlah Saldo
+     * Method withdraw digunakan untuk cek pernarikan saldo dari Line-of-Credit Account
+     * @param amount jumlah saldo
      */
     public boolean withdraw (double amount) {
         if ( ( balance + creditBalance >= amount)) {
             if (balance >= amount) {
-                balance -= amount;
+                balance = balance - amount;
             } else {
-                creditBalance -= (amount - balance);
+                creditBalance = creditBalance - (amount - balance);
                 balance = 0;
                 feeAssessment();
             }
@@ -59,15 +60,15 @@ public class LineOfCredit extends Checking {
     
     /**
      * Method getCreditBalance Memberikan nilai saldo kredit
-     * @return Nilai saldo kredit
+     * @return nilai saldo kredit
      */
     public double getCreditBalance () {
         return creditBalance;
     }
     
     /**
-     * Method getCreditLimit Memberikan nilai limit kredit
-     * @return Nilai limit kredit
+     * Method getCreditLimit Mengambil nilai limit kredit
+     * @return nilai limit kredit
      */
     public double getCreditLimit () {
         return creditLimit;
@@ -75,15 +76,15 @@ public class LineOfCredit extends Checking {
     
     /**
      * Method setCreditBalance Menentukan nilai saldo kredit
-     * @param amount Jumlah nilai untuk saldo kredit
+     * @param amount nilai saldo kredit
      */
     public void setCreditBalance (double amount) {
         creditBalance = amount;
     }
     
     /**
-     * Method setCreditLimit Menentukan nilai limit kredit
-     * @param amount Jumlah nilai untuk limit kredit
+     * Method setCreditLimit Menentukan nilai limit pada kredit
+     * @param amount nilai limit kredit
      */
     public void setCreditLimit (double amount) {
         creditLimit = amount;

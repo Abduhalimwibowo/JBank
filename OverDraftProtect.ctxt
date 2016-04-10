@@ -1,10 +1,10 @@
 #BlueJ class context
-comment0.params=cust\ amount\ save
+comment0.params=cust\ amount\ savingsAccount
 comment0.target=OverDraftProtect(Customer,\ double,\ Savings)
-comment0.text=\r\n\ Method\ Constructor\ dari\ OverDraftProtect\r\n\ @param\ cust\ Obyek\ Customer\ yang\ bersangkutan\r\n\ @param\ amount\ Jumlah\ saldo\ yang\ ingin\ dimasukkan\r\n\ @param\ save\ Obyek\ Savings\ Account\ sebagai\ acuan\r\n
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ OverDraftProtection\r\n\ @param\ cust\ customer\ yang\ memiliki\ account\r\n\ @param\ amount\ jumlah\ saldo\ \r\n\ @param\ saveingsAccount\ account\ akan\ dimasukkan\ ke\ savings\ account\r\n
 comment1.params=
 comment1.target=void\ feeAssessment()
-comment1.text=\r\n\ Method\ feeAssessment\ Perhitungan\ biaya\ proteksi\ dari\ Overdraft\r\n
+comment1.text=\r\n\ Method\ feeAssessment\ Perhitungan\ biaya\ proteksi\ Overdraft\r\n
 comment2.params=amount
 comment2.target=boolean\ withdraw(double)
 comment2.text=\r\n\ Method\ withdraw\ Menarik\ sejumlah\ Saldo\ dari\ Overdraft\ Account\r\n\ @param\ amount\ Jumlah\ Saldo\r\n

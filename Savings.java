@@ -1,53 +1,71 @@
+import java.text.*;
+import java.util.*;
+import java.io.*;
+import java.time.*;
+import java.lang.Math;
+import java.math.*;
 
 /**
- * Kelas Saving merupakan extended kelas dari Account. Kelas ini merupakan berfungsi sebagai
- * akun penyimpanan standar.
+ * Kelas untuk membuat Account Saving
  * @author Abdu Halim Wibowo
- * @version 27 maret 2016
+ * @version 2016.04.10
  */
 public class Savings extends Account
 {
-    // instance variables - replace the example below with your own
     protected double interestEarned;
-
+   
     /**
      * Method Constructor dari Savings
-     * @param cust Obyek Customer sebagai referensi
-     * @param amount Balance yang ingin dimasukkan
-     * @return True or False
+     * @param cust customer account
+     * @param amount saldo yang ingin di input
      */
-    public Savings(Customer cust, double amount){
-        super();
-        ID = Integer.toString(cust.getCustID());
-        super.balance = amount;
+    public Savings (Customer cust, double amount)
+    {
+      super();
+      id = Double.toString(cust.getCustID());
+      super.balance = amount;
+     
+      
     }
     
-    /**
-     * Method withdraw Mengambil sejumlah uang dari suatu akun 
-     * @param amount Jumlah Nilai Kas
+    
+    public double getInterestEarned()
+    {
+        return interestEarned;
+    }
+    
+     /**
+     * Method withdraw Mengambil uang dari account savings 
+     * @param amount jumlah saldo yang akan diambil 
      */
-    public boolean withdraw(double amount) {
-        if (balance - amount >= 10) {
-            balance -= amount;
-            return true;
-        } else {
+    public boolean withdraw(double amount)
+    {
+         
+        if (balance - amount < 0)
+        {
             return false;
+        } 
+        else 
+        {
+            balance = balance - amount;
+            return true;
+        
         }
     }
     
     /**
-     * Method addDailyInterest Menghitung bunga yang didapat sesuai banyaknya hari 
+     * Method addDailyInterest Menghitung fee yang didapatkan customer 
      * @param numberOfDays Banyaknya hari
      */
-    public void addDailyInterest(int numOfDays) {
-        double A, period;
-        period = (double)numOfDays / 365;
-        A = futureValue(balance, 0.03, 360, period);
-        interestEarned = A - balance;
-        balance = A;
+    public void addDailyInterest(int days)
+    {
+      double f, periode;
+      int hari = 365;
+      periode = days/hari;
+      f = nilai(balance,0.03,360,periode);
+      interestEarned = f - balance;
+      balance = f;
     }
     
-    public double getInterestEarned() {
-        return interestEarned;
-    }
+  
 }
