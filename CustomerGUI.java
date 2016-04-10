@@ -1,6 +1,15 @@
-import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import javax.swing.border.Border;
+import javax.swing.*;
 
 public class CustomerGUI extends JFrame {
 
@@ -19,6 +28,7 @@ public class CustomerGUI extends JFrame {
     private JTextField textfield8;
     private JTextField textfield9;
 
+    //Constructor 
     public CustomerGUI(){
 
         this.setTitle("CustomerGUI");
@@ -57,7 +67,7 @@ public class CustomerGUI extends JFrame {
         editorpane2.setForeground(new Color(0,0,0));
         editorpane2.setEnabled(true);
         editorpane2.setFont(new Font("sansserif",0,12));
-        editorpane2.setText("Checking/OverDraft Line of Credit Savings Investment Other");
+        editorpane2.setText("Checking/OverDraft/LineOfCredit/Savings/Investment/Other");
         editorpane2.setBorder(BorderFactory.createBevelBorder(1));
         editorpane2.setVisible(true);
 
@@ -172,8 +182,6 @@ public class CustomerGUI extends JFrame {
         this.pack();
         this.setVisible(true);
     }
-
-   
 
      public static void main(String[] args){
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");

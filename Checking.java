@@ -2,41 +2,36 @@ import java.text.*;
 import java.util.*;
 import java.io.*;
 import java.time.*;
-import java.lang.Math;
 import java.math.*;
+import java.lang.Math;
 
 /**
- * Kelas abstract Checking
+ * Abstract class Checking digunakan untuk menghitung biaya yang akan ditambahkan perbulan.
  * @author Abdu Halim Wibowo
  * @version 2016.04.10
  */
 public abstract class Checking extends Account
 {
-     protected double monthlyFee;
+    protected double monthlyFee;
    
     /**
-     * Method abstract untuk pengecekan biaya Account
+     * method abstract yang digunakan untuk mengecek biaya Account
      */
     protected abstract void feeAssessment();
     
- /**
-  * method ini digunakan untuk menghapus jumlah monthlyFee.
-  * 
-  */
-    public void resetMonthlyFee(){
-        
+    /**
+     * method yang digunakan untuk me-reset biaya bulanan
+     */
+    public void resetMonthlyFee()
+    {
         monthlyFee = 0;
     }
     
     /**
-     * method ini digunakan untuk mengambil banyaknya fee perbulan pada JBank.
-     * 
+     * method yang digunakan untuk mendapatkan biaya perbulan
      */
     public double getMonthlyFee()
     {
         return monthlyFee;
     }
-    
-    
-   
 }

@@ -1,13 +1,14 @@
 #BlueJ class context
-comment0.params=cust\ amount
+comment0.params=customer\ amount
 comment0.target=Savings(Customer,\ double)
-comment0.text=\r\n\ Method\ Constructor\ dari\ Savings\r\n\ @param\ cust\ customer\ account\r\n\ @param\ amount\ saldo\ yang\ ingin\ di\ input\r\n
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Savings\r\n
 comment1.params=
 comment1.target=double\ getInterestEarned()
+comment1.text=\r\n\ method\ untuk\ mendapatkan\ bunga\r\n
 comment2.params=amount
 comment2.target=boolean\ withdraw(double)
-comment2.text=\r\n\ Method\ withdraw\ Mengambil\ uang\ dari\ account\ savings\ \r\n\ @param\ amount\ jumlah\ saldo\ yang\ akan\ diambil\ \r\n
+comment2.text=\r\n\ method\ untuk\ penarikan\ uang\r\n
 comment3.params=days
 comment3.target=void\ addDailyInterest(int)
-comment3.text=\r\n\ Method\ addDailyInterest\ Menghitung\ fee\ yang\ didapatkan\ customer\ \r\n\ @param\ numberOfDays\ Banyaknya\ hari\r\n
+comment3.text=\r\n\ method\ untuk\ menambahkan\ bunga\ per\ hari\r\n
 numComments=4

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=customer\ amount\ term
+comment0.target=Investments(Customer,\ double,\ int)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Investments\r\n
+comment1.params=days
+comment1.target=void\ addDailyInterest(int)
+comment1.text=\r\n\ method\ untuk\ menambahkan\ bunga\ per\ hari\r\n
+comment2.params=amount
+comment2.target=boolean\ withdraw(double)
+comment2.text=\r\n\ method\ untuk\ penarikan\ uang\r\n
+numComments=3

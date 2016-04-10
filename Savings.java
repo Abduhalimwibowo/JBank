@@ -1,10 +1,5 @@
-import java.text.*;
-import java.util.*;
-import java.io.*;
-import java.time.*;
-import java.lang.Math;
-import java.math.*;
-
+ import java.math.*;
+ 
 /**
  * Kelas untuk membuat Account Saving
  * @author Abdu Halim Wibowo
@@ -13,59 +8,62 @@ import java.math.*;
 public class Savings extends Account
 {
     protected double interestEarned;
-   
+
     /**
-     * Method Constructor dari Savings
-     * @param cust customer account
-     * @param amount saldo yang ingin di input
+     * Constructor for objects of class Savings
      */
-    public Savings (Customer cust, double amount)
+    public Savings(Customer customer, double amount)
     {
-      super();
-      id = Double.toString(cust.getCustID());
-      super.balance = amount;
-     
-      
+        super();
+        balance = amount;
+        id = Integer.toString(customer.getCustomerId());
     }
     
-    
+    /**
+     * method untuk mendapatkan bunga
+     */
     public double getInterestEarned()
     {
         return interestEarned;
     }
     
-     /**
-     * Method withdraw Mengambil uang dari account savings 
-     * @param amount jumlah saldo yang akan diambil 
+    /**
+     * method untuk penarikan uang
      */
     public boolean withdraw(double amount)
     {
-         
-        if (balance - amount < 0)
+        if(amount > balance)
         {
             return false;
         } 
-        else 
+        else
         {
             balance = balance - amount;
             return true;
-        
         }
     }
+    /*
+    {
+         if(balance-amount >= 10)
+         {
+             balance-=amount;
+             return true;
+         }
+         else
+         {
+             return false;
+         }
+    }
+    */
     
     /**
-     * Method addDailyInterest Menghitung fee yang didapatkan customer 
-     * @param numberOfDays Banyaknya hari
+     * method untuk menambahkan bunga per hari
      */
     public void addDailyInterest(int days)
     {
-      double f, periode;
-      int hari = 365;
-      periode = days/hari;
-      f = nilai(balance,0.03,360,periode);
-      interestEarned = f - balance;
-      balance = f;
+        double a = Math.pow(((1 + (.03/365))),(365 * days / 365 ));
+        double b = a * balance;
+        interestEarned = b - balance;
+        balance = b;
     }
-    
-  
 }
