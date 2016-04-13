@@ -1,22 +1,22 @@
 #BlueJ class context
 comment0.params=
 comment0.target=java.lang.String\ toString()
-comment0.text=\r\n\ method\ untuk\ mengubah\ tipe\ data\ menjadi\ String\r\n\ method\ toString\ untuk\ melakukan\ overriding\ untuk\ mengembalikan\ ID\ dari\ akun\r\n
+comment0.text=public\ Account(char\ type,\ double\ amount)\ {\r\n\ \ \ \ \ \ \ \ \ \ //acctType\ \=\ type;\ \r\nbalance\ \=\ amount;}
 comment1.params=amount
-comment1.target=boolean\ deposit(double)
-comment1.text=\r\n\ method\ deposit\ dengan\r\n\ @param\ amount\ menunjukkan\ jumlah\ uang\r\n
-comment2.params=
-comment2.target=double\ getBalance()
-comment2.text=\r\n\ untuk\ mengembalikan\ nilai\ balance\r\n
+comment1.target=boolean\ deposite(double)
+comment1.text=\r\n\ Method\ untuk\ deposit\ customer\r\n\ @param\ amount\ saldo\ akun\ customer\ \r\n
+comment2.params=balance\ rate\ compound\ period
+comment2.target=double\ futureValue(double,\ double,\ double,\ double)
 comment3.params=
-comment3.target=java.lang.String\ getId()
-comment3.text=\r\n\ method\ untuk\ mengembalikan\ id\r\n
-comment4.params=amount
-comment4.target=void\ setBalance(double)
-comment4.text=\r\n\ method\ untuk\ melakukan\ setting\ jumlah\ balance\r\n
+comment3.target=double\ getBalance()
+comment3.text=\ \r\n\ Method\ untuk\ mendapatkan\ nilai\ balance\ customer\r\n\ @return\ balance\ sebagai\ nilai\ balance\r\n
+comment4.params=
+comment4.target=java.lang.String\ getId()
+comment4.text=\r\n\ Method\ untuk\ mendapatkan\ Id\ Customer\r\n\ @return\ nomor\ id\ customer\r\n
 comment5.params=amount
-comment5.target=boolean\ withdraw(double)
-comment5.text=\r\n\ method\ untuk\ menarik\ uang\r\n
-comment6.params=balance\ rate\ compound\ period
-comment6.target=double\ nilai(double,\ double,\ double,\ double)
+comment5.target=void\ setBalance(double)
+comment5.text=\r\n\ Method\ untuk\ mengatur\ balance\ customer\r\n\ @param\ amount\ balance\ customer\r\n
+comment6.params=amount
+comment6.target=boolean\ withdraw(double)
+comment6.text=\r\n\ method\ untuk\ customer\ mengambil\ uang\r\n
 numComments=7
