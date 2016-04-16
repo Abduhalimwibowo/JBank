@@ -1,22 +1,23 @@
 #BlueJ class context
 comment0.params=
 comment0.target=java.lang.String\ toString()
-comment0.text=public\ Account(char\ type,\ double\ amount)\ {\r\n\ \ \ \ \ \ \ \ \ \ //acctType\ \=\ type;\ \r\nbalance\ \=\ amount;}
+comment0.text=\r\n\ method\ untuk\ mengubah\ tipe\ data\ menjadi\ String\r\n\ method\ toString\ untuk\ melakukan\ overriding\ untuk\ mengembalikan\ ID\ dari\ akun\r\n
 comment1.params=amount
-comment1.target=boolean\ deposite(double)
-comment1.text=\r\n\ Method\ untuk\ deposit\ customer\r\n\ @param\ amount\ saldo\ akun\ customer\ \r\n
-comment2.params=balance\ rate\ compound\ period
-comment2.target=double\ futureValue(double,\ double,\ double,\ double)
-comment3.params=
-comment3.target=double\ getBalance()
-comment3.text=\ \r\n\ Method\ untuk\ mendapatkan\ nilai\ balance\ customer\r\n\ @return\ balance\ sebagai\ nilai\ balance\r\n
+comment1.target=boolean\ deposit(double)
+comment1.text=\r\n\ Method\ deposit\ untuk\ mendeposit\ atau\ menambahkan\ sejumlah\ uang\ ke\ akun\ yang\ bersangkutan\r\n\ @param\ amount\ Jumlah\ Nilai\ Kas\r\n
+comment2.params=
+comment2.target=java.lang.String\ getID()
+comment2.text=\r\n\ Method\ untuk\ mengembalikan\ id\r\n
+comment3.params=amount
+comment3.target=void\ setBalance(double)
+comment3.text=\r\n\ Method\ untuk\ melakukan\ setting\ jumlah\ balance\r\n
 comment4.params=
-comment4.target=java.lang.String\ getId()
-comment4.text=\r\n\ Method\ untuk\ mendapatkan\ Id\ Customer\r\n\ @return\ nomor\ id\ customer\r\n
-comment5.params=amount
-comment5.target=void\ setBalance(double)
-comment5.text=\r\n\ Method\ untuk\ mengatur\ balance\ customer\r\n\ @param\ amount\ balance\ customer\r\n
+comment4.target=double\ getBalance()
+comment4.text=\r\n\ Method\ getBalance\ Menunjukk\ jumlah\ saldo\ pada\ suatu\ akun\ \r\n
+comment5.params=balance\ rate\ compound\ period
+comment5.target=double\ futureValue(double,\ double,\ double,\ double)
+comment5.text=\r\n\ Method\ untuk\ menghitung\ jumlah\ saldo\ setelah\ dibungakan\ sesuai\ Interest\ Rate\ Formula\ \r\n
 comment6.params=amount
 comment6.target=boolean\ withdraw(double)
-comment6.text=\r\n\ method\ untuk\ customer\ mengambil\ uang\r\n
+comment6.text=\r\n\ Method\ untuk\ menarik\ sejumlah\ uang\r\n
 numComments=7

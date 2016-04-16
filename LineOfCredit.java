@@ -1,32 +1,34 @@
-import java.util.*;
-import java.math.*;
-import java.text.*;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
- * Kelas LineOfCredit ini merupakan ekstensi dari kelas checking 
+ * Kelas untuk membuat Account Line of Credit
  * @author Abdu Halim Wibowo
- * @version 10 April 2016
+ * @version 16 April 2016
  */
-public class LineOfCredit extends Checking
-{
+public class LineOfCredit extends Checking {
     private double creditBalance, creditLimit;
     
     /**
-     * Constructor LineOfCredit dengan beberapa parameter : 
-     * @param cust Obyek Customer acuan
-     * @param amount Jumlah Saldo Checking Account
-     * @param creditAmount Jumlah nilai limit kredit
+     * Constructor for objects of class LineOfCredit
+     * @param customer adalah objek Customer 
+     * @param amount adalah jumlah saldo checking account
+     * @param creditAmount adalah jumlah nilai limit kredit
      */
     public LineOfCredit (Customer cust, double amount, double creditAmount) {
         super();
-        id = Integer.toString(cust.getCustID());
+        ID = Integer.toString(cust.getCustID());
         balance = amount;
         creditBalance = creditAmount;
         creditLimit = creditAmount;
     }
-
+    
     /**
-     * Metode feeAssessment digunakan untuk perhitungan biaya kredit
+     * Method untuk perhitungan biaya kredit
      */
     public void feeAssessment() {
         int days = new GregorianCalendar ().get(Calendar.DAY_OF_MONTH);
@@ -36,10 +38,10 @@ public class LineOfCredit extends Checking
     }
     
     /**
-     * Metode withdraw digunakan untuk menarik sejumlah saldo dari akun Line-of-Credit 
-     * @param amount sebagai jumlah Saldo
+     * Method withdraw Menarik sejumlah Saldo dari Account LineOfCredit
+     * @param amount Jumlah Saldo
      */
-    public boolean withdraw (double amount) {
+    public boolean withdraw (double amount) throws AmountOverDrawnException {
         if ( ( balance + creditBalance >= amount)) {
             if (balance >= amount) {
                 balance -= amount;
@@ -50,37 +52,37 @@ public class LineOfCredit extends Checking
             }
             return true;
         } else {
-            return false;
+            throw new AmountOverDrawnException(this);
         }
     }
     
     /**
-     * Metode getCreditBalance digunakan untuk memberikan nilai saldo kredit
-     * @return Nilai sebagai saldo dari kredit
+     * method untuk mendapatkan nilai saldo kredit
+     * @return nilai saldo kredit
      */
     public double getCreditBalance () {
         return creditBalance;
     }
     
     /**
-     * Metode getCreditLimit digunakan untuk memberikan nilai limit kredit
-     * @return Nilai sebagai limit dari kredit
+     * Method getCreditLimit Memberikan nilai limit kredit
+     * @return Nilai limit kredit
      */
     public double getCreditLimit () {
         return creditLimit;
     }
     
     /**
-     * Metode setCreditBalance digunakan untuk menentukan nilai saldo kredit
-     * @param amount sebagai jumlah nilai untuk saldo kredit
+     * method untuk mengeset nilai saldo kredit
+     * @param amount adalah nilai saldo kredit
      */
     public void setCreditBalance (double amount) {
         creditBalance = amount;
     }
     
     /**
-     * Metode setCreditLimit digunakan untuk menentukan nilai limit kredit
-     * @param amount sebagai jumlah nilai untuk limit kredit
+     * Method setCreditLimit Menentukan nilai limit kredit
+     * @param amount Jumlah nilai untuk limit kredit
      */
     public void setCreditLimit (double amount) {
         creditLimit = amount;

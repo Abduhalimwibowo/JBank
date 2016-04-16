@@ -1,44 +1,52 @@
 
 /**
- * Kelas Savings yang merupakan exxtend dari kelas Account.
+ * Kelas untuk membuat Account Saving
  * @author Abdu Halim Wibowo
- * @version 10/04/2016
+ * @version 16 April 2016
  */
 public class Savings extends Account
 {
     protected double interestEarned;
 
     /**
-     * Constructor for objects of class Savings
+     * Method Constructor dari Kelas Savings
      */
-    public Savings(Customer cust, double amount)
-    {
+    public Savings(Customer cust, double amount){
         super();
-        id = Integer.toString(cust.getCustID());
+        ID = Integer.toString(cust.getCustID());
         super.balance = amount;
     }
-
-     public double getInterestEarned() {
-        return interestEarned;
-    }
     
-   public boolean withdraw(double amount) {
+    /**
+     * Method untuk menarik sejumlah uang 
+     */
+    public boolean withdraw(double amount) throws AmountOverDrawnException{
         if (balance - amount >= 10) {
             balance -= amount;
             return true;
         } else {
-            return false;
+            throw new AmountOverDrawnException(this);
         }
     }
     
-    public void addDailyInterest(int numOfDays) {
+    /**
+     * Method untuk menghitung bunga sesuai jumlah hari 
+     */
+    public void addDailyInterest(int numOfDays) 
+    {
         double A, period;
         period = (double)numOfDays / 365;
         A = futureValue(balance, 0.03, 360, period);
         interestEarned = A - balance;
         balance = A;
     }
-    }
     
-
-
+    
+    /**
+     * Method untuk mendapatkan bunga
+     */
+    public double getInterestEarned() 
+    {
+        return interestEarned;
+    }
+}

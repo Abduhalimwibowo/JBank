@@ -1,141 +1,250 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.*;
-import java.awt.*;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.*;
+import javafx.scene.Scene;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
- * kelas ATMGUI yang menjadi antarmuka bagi pengguna.
+ * Kelas ATM GUI 
  * @author Abdu Halim Wibowo
- * @version 10 April 2016
+ * @version 16 April 2016
  */
-
-public class ATMGUI extends JFrame
+public class ATMGUI extends Application
 {
-     public JLabel amountLabel;
-    public JLabel customerLabel;
-    public JRadioButton SavingacctType;
-    public JRadioButton InvestmentacctType;
-    public JRadioButton LineOfCreditacctType;
-    public JRadioButton OverdraftacctType;
-    public JButton deposit;
-    public JButton withdraw;
-    public JTextField customerText;
-    public JTextField amountText;
-    public JTextArea textAreaMain;
-    public JButton exit;
-    public ButtonGroup radioGroup;
+    private Button withdBtn;
+    private TextField custID, amnt;
+    private TextArea comment;
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("ATM");
+        Scene scene = new Scene(addGridPane(), 700, 320);
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
-    /**
-     * Constructor bagi objek pada kelas ATMGUI
-     */
-    
-    public ATMGUI ()
+
+    }
+
+    private GridPane addGridPane() {
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(15);
+        grid.setPadding(new Insets(20,10,10,20));
+        grid.addRow(0,addTopFlow());
+        grid.addRow(1, addBottomFlow());
+        //grid.addRow();
+        return grid;
+    }
+
+    private FlowPane addTopFlow() {
+        FlowPane flow = new FlowPane();
+        custID = new TextField();
+        custID.setPrefColumnCount(9);
+        amnt = new TextField();
+        amnt.setPrefColumnCount(9);
+
+        Label custLbl = new Label("Enter Customer ID");
+        Label amntLbl = new Label("Enter Amount Here:");
+
+        flow = new FlowPane(15,5);
+        flow.setPadding(new Insets(0,0,0,35));
+        flow.setPrefWrapLength(700);
+
+        ToggleGroup toggle = new ToggleGroup();
+        RadioButton savBtn = new RadioButton("Savings");
+        savBtn.setToggleGroup(toggle);
+        RadioButton invBtn = new RadioButton("Investment");
+        invBtn.setToggleGroup(toggle);
+        RadioButton locBtn = new RadioButton("Line Of Credit");
+        locBtn.setToggleGroup(toggle);
+        RadioButton ovBtn = new RadioButton("Overdraft");
+        ovBtn.setToggleGroup(toggle);
+        VBox radBox = new VBox(5,savBtn,invBtn,locBtn,ovBtn);
+
+        flow.getChildren().addAll(custLbl,custID,radBox,amntLbl,amnt);
+
+        return flow;
+    }
+
+    private FlowPane addBottomFlow() {
+        FlowPane flow = new FlowPane();
+        flow = new FlowPane(5,10);
+        flow.setPrefWrapLength(700);
+
+        comment = new TextArea("Welcome");
+        comment.setEditable(false);
+        comment.setPrefColumnCount(45);
+        comment.setPrefRowCount(10);
+        ScrollPane scrollPane = new ScrollPane(comment);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        VBox inputBox = new VBox();
+        Button depBtn = new Button("Deposit");
+        depBtn.setOnAction(event -> {
+                    comment.setText("Welcome \nCustomer: "+custID.getText()+" deposits an amount of money: Rp"+amnt.getText());
+
+                }
+        );
+        withdBtn = new Button("Withdraw");
+        withdBtn.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        withdBtn.setOnAction(event -> {
+                comment.setText("Welcome \nCustomer: "+custID.getText()+" withdraws an amount of money: Rp"+amnt.getText());
+
+            });
+        Button totBtn = new Button("Total");
+        totBtn.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        Button exBtn = new Button("Exit");
+        exBtn.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        exBtn.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.WARNING,"Windows Closing",ButtonType.CLOSE);
+            alert.showAndWait();
+            Platform.exit();
+        });
+        depBtn.setPrefSize(100,50);
+        withdBtn.setPrefSize(100,50);
+        totBtn.setPrefSize(100,50);
+        exBtn.setPrefSize(100,50);
+        inputBox.getChildren().addAll(depBtn,withdBtn,totBtn,exBtn);
+        flow.getChildren().addAll(scrollPane,inputBox);
+        return flow;
+    }
+
+    /*
+    private JFrame mainFrame;
+    private JLabel idLbl,amntLbl;
+    private JPanel empty = new JPanel();
+    private JPanel submit = new JPanel();
+    private Box box = Box.createVerticalBox();
+    private JPanel emptySpace = new JPanel();
+    private Box panelRow = Box.createVerticalBox();
+    private JPanel panelColumn = new JPanel();
+    private TextArea output = new TextArea("Welcome\n", 10, 70);
+    private TextField idField = new TextField(12);
+    private TextField amntField = new TextField(12);
+
+    public ATMGUI()
     {
-        super("ATMGUI"); 
         buildGUI();
-        setVisible(true);
     }
     
-    public void buildGUI()
+    private void buildGUI()
     {
-        Container contentPane= getContentPane();
-        
-        JFrame mainframe    = new JFrame ("ATMGUI");
-        mainframe.setSize(500,300);
-        mainframe.setLayout (new BoxLayout (mainframe, BoxLayout.Y_AXIS));        
-        
-        JPanel buttonPanel= new JPanel();
-        buttonPanel.setLayout (new BoxLayout (buttonPanel, BoxLayout.Y_AXIS));
-        JPanel checkboxPanel= new JPanel();
-        checkboxPanel.setLayout(new FlowLayout());
-        JPanel infoPanel= new JPanel();
-        infoPanel.setLayout(new FlowLayout ());
-         JPanel textPanel= new JPanel ();
-        textPanel.setLayout(new FlowLayout());
-        JPanel mainPanel= new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        
-        customerLabel   = new JLabel ("Enter Customer ID :");
-        amountLabel     = new JLabel ("Enter amount :");
-        
-        SavingacctType      = new JRadioButton ("Savings");
-        InvestmentacctType  = new JRadioButton ("Investment");
-        LineOfCreditacctType= new JRadioButton ("Line Of Credit");
-        OverdraftacctType   = new JRadioButton ("Overdraft");
-        
-        deposit     =new JButton("Deposit");
-        withdraw    =new JButton("Withdraw");
-        exit        =new JButton("Exit");
-        
-        customerText    = new JTextField(20);
-        amountText      = new JTextField(20);
-        textAreaMain    = new JTextArea(20,40);
-        
-        buttonPanel.add(deposit, BorderLayout.PAGE_START);
-        buttonPanel.add(withdraw, BorderLayout.CENTER);
-        buttonPanel.add(exit, BorderLayout.PAGE_END);
-        
-        checkboxPanel.add(SavingacctType);
-        checkboxPanel.add(InvestmentacctType);
-        checkboxPanel.add(LineOfCreditacctType);
-        checkboxPanel.add(OverdraftacctType);
-        
-       infoPanel.add(customerLabel);
-       infoPanel.add(customerText);
-       infoPanel.add(checkboxPanel);
-       infoPanel.add(amountLabel);
-       infoPanel.add(amountText);
-       
-       textPanel.add(textAreaMain);
-       textPanel.add(buttonPanel);
-       
-       this.add(infoPanel);
-       this.add(textPanel);
-       
-        contentPane.add(mainPanel);
-        pack();
-       deposit.addActionListener(new ButtonHandler(this));
-       withdraw.addActionListener(new ButtonHandler(this));
-       addWindowListener(new WindowHandler());
-        
+        this.column();
+        this.buttons();
+        this.submitButtons();
+        mainFrame = new JFrame ("ATM");
+        mainFrame.setMinimumSize(new Dimension(650, 350));
+        mainFrame.setResizable(false);
+        mainFrame.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+        mainFrame.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mainFrame.addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent windowEvent){
+                    JOptionPane.showMessageDialog(mainFrame, "You are exitting, goodbye!"); 
+                    System.exit(0);
+                }        
+            });
+        mainFrame.add(panelRow);
+        mainFrame.setVisible(true);
     }
-    
-     /**
-     * Method getTextArea digunakan untuk mengembalikan isi teks pada GUI
-     * 
-     * @return ID sebagai ID dari customer
-     */
-    public String getTextArea(){
-        return textAreaMain.getText();
+
+    private void row(JPanel panel) {
+        panelRow.add(panel);
     }
-    
-    /**
-     * Method getIDcust digunakan untuk mengembalikan ID Customer pada GUI
-     * 
-     * @return ID kustomer
-     */
-    public int getIDcust(){
-        return Integer.parseInt(customerText.getText());
+
+    private void column() {
+        JPanel upperPanel = new JPanel();
+        empty.setPreferredSize(new Dimension(15,50));
+        upperPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+        JPanel lowerPanel = new JPanel();
+        lowerPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+        idLbl = new JLabel("Enter customer id ");
+        amntLbl = new JLabel("Enter amount here:");
+
+        upperPanel.add(empty);
+        upperPanel.add(idLbl);
+        upperPanel.add(idField);
+        upperPanel.add(box);
+        upperPanel.add(amntLbl);
+        upperPanel.add(amntField);
+        row(upperPanel);
+        output.setEditable(false);
+        lowerPanel.add(output);
+        lowerPanel.add(submit);
+        row(lowerPanel);
     }
-    
-     /**
-     * Method getNominal digunakan untuk mendapatkan nominal uang yang ditulis customer dalam GUI
-     * 
-     * @return Nominal sebagai jumlah uang yang ditulis
-     */
-    public double getNominal(){
-        return Double.parseDouble(amountText.getText());
+
+    private void buttons() {
+        JRadioButton jrb1 = new JRadioButton("Savings");
+        JRadioButton jrb2 = new JRadioButton("Investment");
+        JRadioButton jrb3 = new JRadioButton("Line Of Credit");
+        JRadioButton jrb4 = new JRadioButton("Overdraft");
+        ButtonGroup bg = new ButtonGroup();
+        box.add(jrb1);
+        box.add(jrb2);
+        box.add(jrb3);
+        box.add(jrb4);
+        jrb1.addItemListener(new ButtonClickListener()); 
+        jrb2.addItemListener(new ButtonClickListener());
+        jrb3.addItemListener(new ButtonClickListener());
+        jrb4.addItemListener(new ButtonClickListener());
+        bg.add(jrb1);
+        bg.add(jrb2);
+        bg.add(jrb3);
+        bg.add(jrb4);
     }
-   
-    
-    /**
-     * Method setTextArea digunakan untuk memasukan teks ke dalam area pada GUI
-     * 
-     * @param Text  sebagai input yang akan ditulis dalam TextArea di GUI
-     */
-    public void setTextArea(String input){
-        textAreaMain.setText(input);
+
+    private void submitButtons() {
+        GridLayout gl = new GridLayout(3,1);
+        submit.setLayout(gl);
+        JButton jb1 = new JButton ("Deposit");
+        JButton jb2 = new JButton ("Withdraw");
+        JButton jb3 = new JButton ("Exit");
+        jb1.setPreferredSize(new Dimension(80,60));
+        submit.add(jb1);
+        submit.add(jb2);
+        submit.add(jb3);
+        jb1.setActionCommand("Deposit");
+        jb2.setActionCommand("Withdraw");
+        jb3.setActionCommand("Exit");
+        jb1.addActionListener(new ButtonClickListener()); 
+        jb2.addActionListener(new ButtonClickListener()); 
+        jb3.addActionListener(new ButtonClickListener()); 
     }
-    
+
+    public class ButtonClickListener implements ActionListener, ItemListener{
+        String customerID, moneyAmount;
+        public void itemStateChanged(ItemEvent e) {
+
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+            output.setText("Welcome\n");
+            customerID = idField.getText();
+            moneyAmount = amntField.getText();
+            if( command.equals( "Deposit" ))  {
+                output.append("Customer :" + customerID + " saves an amount of money : Rp " + moneyAmount +".");
+            }
+            else if( command.equals( "Withdraw" ) )  {
+                output.append("Customer :" + customerID + " withdraw an amount of money : Rp " + moneyAmount +"."); 
+            }
+            else  if( command.equals( "Exit" ) ){
+                JOptionPane.showMessageDialog(mainFrame, "You are exitting, goodbye!"); 
+                System.exit(0);    
+            }      
+        }     
+    }
+    */
 }

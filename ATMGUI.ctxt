@@ -1,19 +1,12 @@
 #BlueJ class context
-comment0.params=
-comment0.target=ATMGUI()
-comment0.text=\r\n\ Constructor\ bagi\ objek\ pada\ kelas\ ATMGUI\r\n
-comment1.params=
-comment1.target=void\ buildGUI()
+comment0.params=args
+comment0.target=void\ main(java.lang.String[])
+comment1.params=primaryStage
+comment1.target=void\ start(javafx.stage.Stage)
 comment2.params=
-comment2.target=java.lang.String\ getTextArea()
-comment2.text=\r\n\ Method\ getTextArea\ digunakan\ untuk\ mengembalikan\ isi\ teks\ pada\ GUI\r\n\ \r\n\ @return\ ID\ sebagai\ ID\ dari\ customer\r\n
+comment2.target=javafx.scene.layout.GridPane\ addGridPane()
 comment3.params=
-comment3.target=int\ getIDcust()
-comment3.text=\r\n\ Method\ getIDcust\ digunakan\ untuk\ mengembalikan\ ID\ Customer\ pada\ GUI\r\n\ \r\n\ @return\ ID\ kustomer\r\n
+comment3.target=javafx.scene.layout.FlowPane\ addTopFlow()
 comment4.params=
-comment4.target=double\ getNominal()
-comment4.text=\r\n\ Method\ getNominal\ digunakan\ untuk\ mendapatkan\ nominal\ uang\ yang\ ditulis\ customer\ dalam\ GUI\r\n\ \r\n\ @return\ Nominal\ sebagai\ jumlah\ uang\ yang\ ditulis\r\n
-comment5.params=input
-comment5.target=void\ setTextArea(java.lang.String)
-comment5.text=\r\n\ Method\ setTextArea\ digunakan\ untuk\ memasukan\ teks\ ke\ dalam\ area\ pada\ GUI\r\n\ \r\n\ @param\ Text\ \ sebagai\ input\ yang\ akan\ ditulis\ dalam\ TextArea\ di\ GUI\r\n
-numComments=6
+comment4.target=javafx.scene.layout.FlowPane\ addBottomFlow()
+numComments=5

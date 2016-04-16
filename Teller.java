@@ -1,94 +1,82 @@
-import java.util.*;
+import javafx.application.Application;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.math.BigDecimal;
+import java.lang.Math;
 import java.math.MathContext;
-import java.text.*;
+import java.math.RoundingMode;
 
 /**
- * Kelas Teller ini merupakan proses awal dari aplikasi JBank pada saat akan dijalankan.
+ * Kelas ini merupakan kelas utama dari program JBank.
+ * Kelas ini memodelkan teller dalam suatu bank
  * @author Abdu Halim Wibowo
- * @version 10 April 2016
+ * @version 16 April 2016
  */
-public class Teller {
-   /*
-    * Tugas Modul 2
-   {
-    private Customer c1 = new Customer ();
-    private Account a1 = new Account ();
-    private String fullname;
-    private Account acc;
-    private double balance;
-    */
- 
-    /**
-     * Constructor for objects of class Teller
-     */
-    public Teller()
-    {
-       
-    }
-    
-    private static MathContext mc = new MathContext(3);
+public class Teller
+{
     private static Date ctime, stime; 
-   
-    
-        /*Modul 2
-        Customer c1 = new Customer();       //membuat object customer c1
-        c1.setName("Sanadhi", "Sutandi");   //memasukkan nama pada customer dengan method setName()
-        System.out.println(c1.getName());   //me-print namanya
-        
-        Account a1 = new Account();     //membuat object account a1
-        a1.setBalance(1000);            //memasukkan balance customer
-        c1.setAccount(a1);              //meset account a1 ke object c1
-        
-        Account c1a1 = c1.getAccount(); //mengakses object account dari c1        
-        System.out.println(c1a1.getBalance());  //me-print balance dari customer c1 dengan account a1
-        */
-        
-  
-        String useracc;
-        String firstname;
-        String lastname;
-        String dob;
-        String telpnum;
-        String accttype;
-        String startTime;
-        String closeTime;
-        int day2;
-        int month2;
-        int year2;
-        int hour;
-        int minute;
-        int second;
-        int day;
-        int month;
-        int year;
-        int bal;
-        double startBalance, iSaving, iInvest, deposite;
-        double withdraw = 750;
-        double financeCharge = 0;
-        
-       public static void main(String[] args) {
+    private static MathContext mc = new MathContext(3);
+    //private Customer[] newCustomer = new Customer(Bank.maxNumOfCustomers);
+    /**
+     * main method aplikasi
+     */
+    public static void main(String[] args) {
+        Bank b = new Bank();
         Customer c = new Customer("Abdu","Halim");
         Savings s = new Savings(c,500);
         s.addDailyInterest(280);
         Investment i = new Investment(c, 1000, 12);
         i.addDailyInterest(280);
-        OverDraftProtection o = new OverDraftProtection(c, 1500, s);
+        OverDraftProtect o = new OverDraftProtect(c, 1500, s);
         LineOfCredit l = new LineOfCredit (c, 3000, 1000);
-        c.addAccount(s);
-        c.addAccount(i);
-        c.addAccount(o);
-        c.addAccount(l);
-        System.out.println("Before Withdraw\n");
+        try {
+            c.addAccount(s);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            c.addAccount(l);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            c.addAccount(i);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        LineOfCredit l2 = new LineOfCredit (c, 3000, 1000);
+        try {
+            c.addAccount(l2);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            c.getAccount('O');
+        } catch (AccountTypeNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            s.withdraw(2000);
+        } catch (AmountOverDrawnException e) {
+            System.out.println(e.getMessage());
+        }
+        b.addCustomer(c);
+        b.printAllCustomers();
         c.printAllAccounts();
-        o.withdraw(1000);
-        o.withdraw(800);
-        l.withdraw(2000);
-        l.withdraw(2000);
-        System.out.println("After Withdraw\n");
-        c.printAllAccounts();
+        //Application.launch(ATMGUI.class, args);
+
     }
-       /*Bank b = new Bank();
+    
+    /*
+    public void sessionMod5 () {
+           Bank b = new Bank();
        Scanner s = new Scanner(System.in);
        String input = "",fname,lname,phone,addr,city,email,zip;
        Customer c = null;
@@ -113,7 +101,7 @@ public class Teller {
            input = "";
            balance = 0;
            do {
-               System.out.println("Apakah anda ingin membuat akun Customer baru? (Y/N)");
+               System.out.println("Apakah ingin membuat Customer? (Y/N)");
                input = s.nextLine();
                if ( ( input.equals("y") ) || ( input.equals("Y")) ) {
                    loopState = true;
@@ -122,54 +110,54 @@ public class Teller {
                    loopState = false;
                    break;
                } else {
-                   System.out.println("Input hanya Y atau N saja\n");
+                   System.out.println("Input Terbatas Y Atau N Saja\n");
                } 
            } while (!loopState);
            
 
            if(loopState) {
-               System.out.print("Input nama depan: ");
+               System.out.print("Masukkan nama depan: ");
                input = s.nextLine();
                fname = input;
-               System.out.print("Input nama belakang: ");
+               System.out.print("Masukkan nama belakang: ");
                input = s.nextLine();
                lname = input;
-               System.out.print("Input nama kota: ");
+               System.out.print("Masukkan nama kota: ");
                input = s.nextLine();
                city = input;
-               System.out.print("Input alamat jalan: ");
+               System.out.print("Masukkan alamat jalan: ");
                input = s.nextLine();
                addr = input;
-               System.out.print("Input email: ");
+               System.out.print("Masukkan alamat email: ");
                input = s.nextLine();
                email = input;
-               System.out.print("Input nomor telepon: ");
+               System.out.print("Masukkan nomor telepon: ");
                input = s.nextLine();
                phone = input;
-               System.out.print("Input kode pos / zip: ");
+               System.out.print("Masukkan kode pos / zip: ");
                input = s.nextLine();
                zip = input;
-               System.out.print("Input tanggal lahir (Format DD-MM-YY): ");
+               System.out.print("Masukkan tanggal lahir (Format DD-MM-YY): ");
                input = s.nextLine();
                try {
                    DOB = new SimpleDateFormat("dd-MM-yyyy").parse(input);
                   
                } catch (ParseException e) {
-                System.out.println("Maaf, data yang anda masukkan tidak sesuai, silahkan mencoba lagi");
+                System.out.println("Tidak Sesuai");
                }
               System.out.println("S: Savings; O: Overdraft; I:Investment; L: Credit Checking; T: Tidak Membuat");
-              System.out.print("Input tipe akun yang akan dibuat (S/O/I/L/T): ");
+              System.out.print("Masukkan jenis akun (S/O/I/L/T): ");
               input = s.nextLine();
               if (input.equals("T")) {
                   
               } else {
                   acctType = input.charAt(0);
                   do {
-                    System.out.print("Input nilai saldo awal: ");
+                    System.out.print("Memasukkan nilai saldo awal: ");
                     input = s.nextLine();
                     balance = Integer.parseInt(input);
                     if (balance<=0) {
-                        System.out.println("Input nilai yang benar!");
+                        System.out.println("Masukkan nilai yang benar!");
                     } else {
                         break;
                     }
@@ -178,14 +166,14 @@ public class Teller {
               c = new Customer(fname, lname, DOB);
               c.setAddress(addr, city, zip);
               c.setEmail(email);
-              c.setPhoneNumber(phone);
+              c.setPhone(phone);
               c.addAccount(balance, acctType);
 
            } else {
                break;
             }
            if (c!= null) {
-               System.out.println( b.addCustomer(c)?"Customer bertambah.": "Customer tidak terbuat." );
+               System.out.println( b.addCustomer(c)?"Customer ditambahkan": "Customer tidak ditambahkan" );
                customerCreated++;
            }
        }
@@ -195,152 +183,186 @@ public class Teller {
             Account acc = new Account(c,1000,'C');
             System.out.println("Account Type: " + acc.getAcctType());
             System.out.println("Balance     : " + acc.getBalance());
-            System.out.println("ID          : " + acc.getId());
+            System.out.println("ID          : " + acc.getID());
         }
-       
-    }
-        
-        //Menghitung Interest Rate
-        /*Account saving = new Account ('S', 1000);
-        Account invest = new Account ('I', 1000);
-        Account creditline = new Account ('L', 1000);
-        System.out.println("Current Savings: " + saving.getBalance());
-        iSaving = new BigDecimal(futureValue(saving.getBalance(),0.03,360,1)).subtract(new BigDecimal(saving.getBalance()),mc.DECIMAL32).doubleValue();
-        System.out.println("1 year interest rate : " + iSaving);
-        saving.deposite(iSaving);
-        System.out.println("Future Savings : " + invest.getBalance());
-        System.out.println("Current Investment Value : " + invest.getBalance());
-        iInvest = new BigDecimal(futureValue(invest.getBalance(),0.07,360,1)).subtract(new BigDecimal(invest.getBalance()),mc.DECIMAL32).doubleValue();
-        System.out.println("1 year investment interest rate : " + iInvest);
-        invest.deposite(iInvest);
-        System.out.println("Future Investment Value: " + invest.getBalance());
+    }*/
+    /*
+    public void sessionMod4 () {
+        Customer cust1 = new Customer();
+        Account saving = new Account (cust1, 1000,'S');
+        Account invest = new Account (cust1 , 1000, 'I');
+        Account creditline = new Account (cust1, 500, 'L');
+        double iS, iI;
+        System.out.println("Present Saving Value: US$" + saving.getBalance());
+        iS = new BigDecimal(futureValue(saving.getBalance(),0.03,360,1)).subtract(new BigDecimal(saving.getBalance()),mc.DECIMAL32).doubleValue();
+        System.out.println("Saving Interest Rate  (1 year): US$" + iS);
+        saving.deposit(iS);
+        System.out.println("Future Saving Value: US$" + saving.getBalance());
+        System.out.println("\nPresent Investment Value : US$" + invest.getBalance());
+        iI = new BigDecimal(futureValue(invest.getBalance(),0.07,360,1)).subtract(new BigDecimal(invest.getBalance()),mc.DECIMAL32).doubleValue();
+        System.out.println("Investment Interest Rate (12 Months - Term): US$" + iI);
+        invest.deposit(iI);
+        System.out.println("Future Investment Value : US$" + invest.getBalance());
         saving.setBalance(500);
-        creditline.setBalance(500);
-        System.out.println("\nSavings Value: " + saving.getBalance());
-        System.out.println("Line-of-Credit: " + creditline.getBalance());
-        System.out.println("Withdraw: " + withdraw);
-        
+        double withdraw = 750;
+        double financeCharge = 0;
+        System.out.println("\nSaving Value: US$" + saving.getBalance());
+        System.out.println("Line-of-Credit Value: US$" + creditline.getBalance());
+        System.out.println("Withdrawal : US$" + withdraw);
         if (saving.getBalance()<withdraw) {
             financeCharge = withdraw - saving.getBalance();
             saving.withdraw(withdraw-financeCharge);
             creditline.withdraw(financeCharge);
         }
-        System.out.println("\nNew savings value: " + saving.getBalance());
-        System.out.println("Line-of-Credit: " + creditline.getBalance());
-        double iCredit = futureValue(financeCharge,0.18,360,1) - financeCharge;
-        System.out.println("Line-of-Credit's Interest rate (1 year) : " + iCredit);
-        financeCharge += iCredit;
-        System.out.println("Total Bill: " + financeCharge);*/
- 
-   
-        Scanner scan = new Scanner(System.in);
-        Scanner cycle = new Scanner(System.in);
-        ArrayList array = new ArrayList();
-    
-        //Untuk mengatur waktu buka 
-        public static void setStartTime(int year,int month,int day, int hour, int min) {
-        stime = new GregorianCalendar(year, month, day, hour, min).getTime();
+        System.out.println("\nSaving Value: US$" + saving.getBalance());
+        System.out.println("Line-of-Credit Value: US$" + creditline.getBalance());
+        double iC = futureValue(financeCharge,0.18,360,1) - financeCharge;
+        System.out.println("Line-of-Credit Interest Rate (1 year) : US$" + iC);
+        financeCharge += iC;
+        System.out.println("Total Finance Charge: US$" + financeCharge);
     }
-       
-        //Untuk mengatur waktu tutup
+    */
+   
+    /**
+     * Kelas untuk membuat session pembuatan Customer beserta Account
+     */
+    /*
+    public void Session() {
+        double balance;
+        Scanner s = new Scanner(System.in);
+        String input = "",fname,lname,phone;
+        Customer cust1 = new Customer();
+        Date DOB = null;
+        char acctType;
+        List<Customer> customers = new ArrayList<Customer>();
+       /*
+       Customer c1 = new Customer(); //Pembuatan objek Customer baru dengan nama c1
+       Account a1 = new Account(), acc; //Pembuatan objek Account baru dengan nama a1 juga acc sebagai variable referensi
+       c1.setName("Sanadhi","Sutandi"); //Assign nama pada object c1
+       System.out.println(c1.getName()); //print nama c1
+       a1.setBalance(1000000); //Assign nilai balance pada object a1
+       c1.setAccount(a1); //Assign object Account a1 pada object Customer c1
+       acc = c1.getAccount(); //acc mengambil referensi object Account dari object Customer c1
+       System.out.println(acc.getBalance()); //print nilai balance account a1 yang dimiliki oleh customer c1
+      do {
+            System.out.println("Apakah ingin membuat Customer? (Y/N)");
+            input = s.next();
+        if ( ( input.equals("y") ) || ( input.equals("Y")) ) {
+            break;
+        } else if ( ( input.equals("n") ) || ( input.equals("N") ) ) {
+             System.out.println("System Berhenti"); 
+             break;
+        } else {
+            System.out.println("Input Terbatas Y Atau N Saja\n");
+        }
+      } 
+      while(true);
+      
+      if ( ( input.equals("n") ) || ( input.equals("N") ) ) {
+        } else {
+          outerloop:
+          do {
+              acctType = '\0';
+              System.out.print("Masukkan nama depan: ");
+              input = s.next();
+              fname = input;
+              System.out.print("Masukkan nama belakang: ");
+              input = s.next();
+              lname = input;
+              System.out.print("Masukkan tanggal lahir (Format DD-MM-YY): ");
+              input = s.next();
+              try {
+                  DOB = new SimpleDateFormat("dd-MM-yyyy").parse(input);
+                  
+                }
+            catch (ParseException e) {
+                System.out.println("Tidak Sesuai");
+            }
+              System.out.print("Masukkan nomor telepon: ");
+              input = s.next();
+              phone = input;
+               
+              Customer c = new Customer(fname,lname,DOB);
+              customers.add(c);
+              c.setPhone(phone);
+               
+              System.out.println("S: Savings; O: Overdraft; I:Investment; L: Credit Checking; T: Tidak Membuat");
+              System.out.print("Masukkan jenis akun (S/O/I/L/T): ");
+              input = s.next();
+              if (input.equals("T")) {
+                  
+              } else {
+                  acctType = input.charAt(0);
+                  do {
+                    System.out.print("Memasukkan nilai saldo awal: ");
+                    input = s.next();
+                    balance = Integer.parseInt(input);
+                    if (balance<=0) {
+                        System.out.println("Masukkan nilai yang benar!");
+                    } else {
+                        break;
+                    }
+                  } while(true);
+                  if (customers != null && !customers.isEmpty()) {
+                  c.setAccount(balance,acctType);
+                  }
+              }
+              
+              System.out.println("Berikut adalah informasi pengguna");
+              System.out.println(c);
+              /*System.out.println("Customer ID   :   " + c.getCustId());
+              System.out.println("First Name    :   " + fname);
+              System.out.println("Last Name     :   " + lname);
+              System.out.println("DOB           :   " + DOB);
+              if (acctType != '\0')
+                System.out.print(c.getAccount(acctType));
+              /*System.out.println("\nAccount Type  :   " + acctType);
+              System.out.println("ID            :   " + c.getAccount(acctType).getId() );
+              System.out.println("Balance       :   " + balance);
+              
+              do {
+                   System.out.println("Ingin membuat Customer lagi (Y/N)");
+                   input = s.next();
+                if ( ( input.equals("y") ) || ( input.equals("Y")) ) {
+                    continue outerloop;
+                } else if ( ( input.equals("n") ) || ( input.equals("N") ) ) {
+                     System.out.println("System Berhenti"); 
+                     break outerloop;
+                } else {
+                    System.out.println("Input Terbatas Y Atau N Saja\n");
+                }
+              } 
+              while(true);
+              
+          } while(true);
+        }
+    }*/
+    
+     /**
+     * Constructor Teller
+     */
+    public Teller() {
+    }
+    
+    /**
+     * Method untuk membuat customer baru
+     * @param String firstName adalah nama depan nasabah
+     * @param String lastName adalah nama belakang nasabah
+     * @param Date dob adalah tanggal lahir nasabah
+     */
     public Customer createNewCustomer(String fname, String lname, Date DOB) {
         return new Customer(fname, lname, DOB);
     }
     
-        //Mendapatkan data customer
+    /**
+     * Method untuk customer baru
+     * @param int custId 
+     */
     public Customer getCustomer(int customerID) {
         return new Customer();
     }
     
-        /*System.out.println("Do you want to make a new account ? Yes or No");
-        useracc = scan.nextLine();
-        if(useracc.equalsIgnoreCase("Yes")){
-            //Array untuk objek customer
-            Customer[] c = new Customer[20];
-            Account[] a = new Account[20];
-            Date[] date = new Date[20];
-            int i = 0;
-            do{
-                //Memasukan data customer 
-                System.out.println("First Name :");
-                firstname = scan.nextLine();
-                System.out.println("Last Name :");
-                lastname = scan.nextLine();
-                System.out.println("Date Of Birth (DD/MM/YYYY):");
-                dob = scan.nextLine();
- 
-                day = Integer.parseInt(dob.substring(0,2));
-                month = Integer.parseInt(dob.substring(2,4)) + 1;
-                year = Integer.parseInt(startTime.substring(4,8));
-                
-                date[i] = new GregorianCalendar(year, month, day).getTime();
-                System.out.println("Telephone Number :");
-                telpnum= scan.nextLine();
-                
-                //Membuat objek customer
-                c[i] = new Customer(firstname, lastname, date[i]);
-                c[i].setPhoneNumber(telpnum);
-                
-                System.out.println("Input your account type : Savings(S), Overdraft (O), Credit (C), Investment (I)");
-                accttype = scan.nextLine();
-                if(accttype.equalsIgnoreCase("Savings")){
-                    System.out.println("Input Your Balance :");
-                    bal = scan.nextInt();
-                    a[i] = new Account('S', bal);
-                }
-                else if(accttype.equalsIgnoreCase("Overdraft")){
-                    System.out.println("Input Your Balance :");
-                    bal = scan.nextInt();
-                    a[i] = new Account('O', bal);
-                }
-                else if(accttype.equalsIgnoreCase("Credit")){
-                    System.out.println("Input Your Balance :");
-                    bal = scan.nextInt();
-                    a[i] = new Account('L', bal);
-                }
-                else if(accttype.equalsIgnoreCase("Investment")){
-                    System.out.println("Input Your Balance :");
-                    bal = scan.nextInt();
-                    a[i] = new Account('I', bal);
-                }
-                else{
-                    a[i] = new Account();
-                }
-                // Menampilkan informasi customer 
-                System.out.println("# Name\t\t: "+c[i].getName());
-                System.out.println("# Phone\t\t:"+c[i].getPhoneNumber());
-                System.out.println("# ID\t\t:"+c[i].getCustomer());
-                System.out.println("# Balance\t:"+a[i].getBalance());
-                System.out.println("# Account\t:"+a[i].getAcctType());
-                System.out.println("# DOB\t\t:"+c[i].getdateOfBirth());
-                
-                //Membuat akun customer baru
-                System.out.println("Do you want to make another customer account ? Yes or No");
-                useracc = cycle.nextLine();
-                
-                i++;
-                if(i==20){
-                    break;
-                }
-            }while(useracc.equalsIgnoreCase("Yes"));
-        }
-        else{
-            System.out.println("Shutting Down");
-        }System.out.println("Thank You For Stoping By !");*/
-        
-        
-        //Memasukan waktu tutup program
-       public static void setCloseTime(int year,int month,int day,int hour, int min) {
-        ctime = new GregorianCalendar(year, month, day, hour, min).getTime();
-    }
-        
-        //Menampilkan waktu tutup dan buka program 
-        public static void printTime() {
-        System.out.println(Bank.getHoursOfOperation());
-    }
-    
-      public static double futureValue(double balance, double rate, double compound, double period) 
-    {
+    public static double futureValue(double balance, double rate, double compound, double period) {
         BigDecimal bal = new BigDecimal (balance);
         BigDecimal r = new BigDecimal (rate);
         BigDecimal n = new BigDecimal (compound);
@@ -352,40 +374,48 @@ public class Teller {
         return f4.doubleValue();
     }
     
-    public static void getAccount(Customer customer)
-    {
-        for (int x = 0; x < customer.accounts.length; x++)
-        {
-            if (customer.accounts[x] != null)
-            {
-                System.out.println("Account : " + customer.accounts[0].getId());
-                System.out.println("Balance : " + customer.accounts[0].getBalance());
-            }
-        }
+    /**
+     * Method getCloseTime Mendapatkan waktu tutup
+     * @return Waktu tutup
+     */
+    public static Date getCloseTime() {
+        return ctime;
     }
-}              
-
-
-
-    /*
-     * Tugas Modul 2
-     * {   c1.setName("Sutandi", "Sanadhi"); //nama customer c1
-        fullname = c1.getName();//full name akan berisi nama customer c1
-        System.out.println(fullname);//memperlihatkan nama dari customer c1 pada layar
-        
-        a1.setBalance(20000); //membuat deposit dari customer c1
-        c1.setAccount(a1); //membuat akun a1 dengan informasi mengenai customer c1
-        
-        acc = c1.getAccount();//akun a1 akan menerima informasi dari customer c1
-        balance = acc.getBalance();//memasukan jumlah saldo ke akun a1
-        
-        System.out.println(balance);//memperlihatkan jumlah saldo akun a1 pada layar
-      
-        }*/
-        
-      
-
-
-
-
+   
+    /**
+     * Method getStartTime Mendapatkan waktu mulai
+     * @return Waktu buka
+     */
+    public static Date getStartTime() {
+        return stime;
+    }
     
+    /**
+     * Method setCloseTime Menentukan waktu tutup
+     * @param hour dalam Jam
+     * @param min dalam Menit
+     */
+    public static void setCloseTime(int year,int month,int day,int hour, int min) {
+        ctime = new GregorianCalendar(year, month, day, hour, min).getTime();
+    }
+   
+    /**
+     * Method setStartTime Menentukan waktu mulai
+     * @param hour dalam Jam
+     * @param min dalam Menit
+     */
+    public static void setStartTime(int year,int month,int day, int hour, int min) {
+        stime = new GregorianCalendar(year, month, day, hour, min).getTime();
+    }
+    
+    /**
+     * Method setStartTime Menentukan waktu mulai
+     * @param hour dalam Jam
+     * @param min dalam Menit
+     */
+    public static void printTime() {
+        System.out.println(Bank.getHoursOfOperation());
+    }
+    
+    
+}
