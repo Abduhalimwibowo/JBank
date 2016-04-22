@@ -1,35 +1,49 @@
 
 /**
- * Kelas Account Type Not Found Exception 
+ * Write a description of class AccountTypeAlreadyExists here.
+ * 
  * @author Abdu Halim Wibowo
- * @version 16 April 2016
+ * @version 16.04.2016
  */
-public class AccountTypeNotFoundException extends Exception
+public class AccountTypeNotFoundException extends java.lang.Exception
 {
-    private char accType;
+    // instance variables - replace the example below with your own
+    public char akun;
+    public AccountTypeNotFoundException (char akun){
+        super ("Account does not exit");
+        this.akun=akun;
+    }
 
     /**
-     * Constructor untuk objek dari kelas AccountTypeNotfound
+     * Constructor for objects of class AccountTypeAlreadyExists
      */
-    public AccountTypeNotFoundException(char acct)
-    {
-        super("Account does not exist ");
-        accType = acct;
+    public String getMessage(){
+ 
+        String messageOut= "Error!!!";
+        if(this.akun=='S'){
+            messageOut= "Savings";
+        }
+        else if (this.akun=='I'){
+            messageOut="Investment";
+        }
+        else if (this.akun=='L'){
+            messageOut="Line-Of-Credit";
+        }
+        else if (this.akun=='O'){
+            messageOut="Overdraft";
+        }
+        return super.getMessage () + messageOut;
     }
 
-     public String getMessage()
+    /*/**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
+    /*public void AccountTypeAlreadyExists(char acctType)
     {
-        switch(accType){
-            case 'S':
-                return "Savings" + super.getMessage() ;
-            case 'I':
-                return "Investments" + super.getMessage();
-            case 'O':
-                return "OverDraft Protection" + super.getMessage();
-            case 'L':
-                return "Line of Credits" + super.getMessage();
-            default:
-                return "Wrong type of input";
-            }           
-    }
+        // put your code here
+        //return x + y;
+    }*/
 }

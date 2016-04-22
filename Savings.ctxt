@@ -1,14 +1,14 @@
 #BlueJ class context
 comment0.params=cust\ amount
 comment0.target=Savings(Customer,\ double)
-comment0.text=\r\n\ Method\ Constructor\ dari\ Kelas\ Savings\r\n
-comment1.params=amount
-comment1.target=boolean\ withdraw(double)
-comment1.text=\r\n\ Method\ untuk\ menarik\ sejumlah\ uang\ \r\n
-comment2.params=numOfDays
-comment2.target=void\ addDailyInterest(int)
-comment2.text=\r\n\ Method\ untuk\ menghitung\ bunga\ sesuai\ jumlah\ hari\ \r\n
-comment3.params=
-comment3.target=double\ getInterestEarned()
-comment3.text=\r\n\ Method\ untuk\ mendapatkan\ bunga\r\n
+comment0.text=\r\n\ kontrukstor\ untuk\ kelas\ Savings\r\n\ \r\n\ @param\ cust\ akun\ customer\r\n\ @param\ amount\ jumlah\ yang\ akan\ dimasukkan\r\n
+comment1.params=
+comment1.target=double\ getInterestEarned()
+comment1.text=\r\n\ metode\ getter\ untuk\ pengambilan\ bunga\r\n\ \r\n\ @return\ bunga\ yang\ didapatkan\r\n
+comment2.params=amount
+comment2.target=void\ withdraw(double)
+comment2.text=\r\n\ method\ untuk\ menarik\ balance\ dari\ savings\r\n\ \r\n\ @param\ amount\ jumalah\ yang\ akan\ ditarik\r\n
+comment3.params=days
+comment3.target=void\ addDailyInterest(int)
+comment3.text=\r\n\ Method\ berikut\ ini\ menunjukan\ balance\ dari\ akun\ saving\ setelah\ mendapat\ bunga\ majemuk\ 3%\ selama\ setahun,\r\n\ dimana\ bunga\ dihitung\ tiap\ harinya.\r\n\ \r\n\ @param\ days\ hari\ bunga\r\n
 numComments=4

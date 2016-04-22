@@ -1,35 +1,48 @@
-
 /**
- * Kelas Account Type Exist Exception 
+ * Write a description of class AmountOverDrawnException here.
+ * 
  * @author Abdu Halim Wibowo
- * @version 16 April 2016
+ * @version 16.04.2016
  */
-public class AccountTypeAlreadyExistException extends Exception
+
+public class AccountTypeAlreadyExistException extends java.lang.Exception
 {
-    private Account accountType;
+    // instance variables - replace the example below with your own
+    public Account akun;
+    public AccountTypeAlreadyExistException (Account akun){
+        super ("Unable to crate duplicate account of type ");
+        this.akun=akun;
+    }
 
     /**
-     * Constructor untuk objek dari kelas AccountTypeAlreadyExistException
+     * Constructor for objects of class AccountTypeAlreadyExists
      */
-    public AccountTypeAlreadyExistException(Account acct)
-    {
-        super("Unable to create a duplicate account of type ");
-        accountType = acct;
+    public String getMessage(){
+        String messageOut= "Error!!!";
+        if(this.akun instanceof Savings && akun instanceof Investment==false){
+            messageOut= "Savings";
+        }
+        else if (this.akun instanceof Investment && akun instanceof Investment== true){
+            messageOut="Investment";
+        }
+        else if (this.akun instanceof LineOfCredit){
+            messageOut="Line-Of-Credit";
+        }
+        else if (this.akun instanceof OverDraftProtection){
+            messageOut="Overdraft";
+        }
+        return super.getMessage () + messageOut;
     }
 
-    
-    public String getMessage()
+    /*/**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
+    /*public void AccountTypeAlreadyExists(char acctType)
     {
-        if (accountType instanceof Savings && !(accountType instanceof Investment) ){
-            return super.getMessage() + "Savings";
-        } else if (accountType instanceof Investment){
-            return super.getMessage() + "Investments";
-        } else if (accountType instanceof OverDraftProtect){
-            return super.getMessage() + "OverDraft Protection";
-        } else if (accountType instanceof LineOfCredit){
-            return super.getMessage() + "Line of Credit";
-        } else {
-            return "No account";
-        }        
-    }
+        // put your code here
+        //return x + y;
+    }*/
 }

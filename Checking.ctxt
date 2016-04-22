@@ -1,11 +1,10 @@
 #BlueJ class context
 comment0.params=
 comment0.target=void\ feeAssessment()
-comment0.text=\r\n\ method\ abstract\ yang\ digunakan\ untuk\ mengecek\ biaya\ Account\r\n
 comment1.params=
 comment1.target=void\ resetMonthlyFee()
-comment1.text=\r\n\ method\ yang\ digunakan\ untuk\ me-reset\ biaya\ bulanan\r\n
+comment1.text=\r\n\ method\ untuk\ mereset\ biaya\ bulanan\r\n
 comment2.params=
 comment2.target=double\ getMonthlyFee()
-comment2.text=\r\n\ method\ yang\ digunakan\ untuk\ mendapatkan\ biaya\ perbulan\r\n
+comment2.text=\r\n\ method\ untuk\ mengembalikan\ biaya\ bulanan\r\n\ \r\n\ @return\ biaya\ bulanan\r\n
 numComments=3

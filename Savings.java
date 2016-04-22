@@ -1,52 +1,66 @@
 
 /**
- * Kelas untuk membuat Account Saving
+ * Kelas yang mewakili saving, ektensi dari Account
+ * 
  * @author Abdu Halim Wibowo
- * @version 16 April 2016
+ * @version 16.04.2016
  */
-public class Savings extends Account
+public  class Savings extends Account
 {
-    protected double interestEarned;
-
     /**
-     * Method Constructor dari Kelas Savings
+     * variabel untuk menyimpan bunga yang didapatkan 
      */
-    public Savings(Customer cust, double amount){
-        super();
-        ID = Integer.toString(cust.getCustID());
-        super.balance = amount;
-    }
+    protected double interestEarned;
+    public double amount;
     
     /**
-     * Method untuk menarik sejumlah uang 
+     * kontrukstor untuk kelas Savings
+     * 
+     * @param cust akun customer
+     * @param amount jumlah yang akan dimasukkan
      */
-    public boolean withdraw(double amount) throws AmountOverDrawnException{
-        if (balance - amount >= 10) {
-            balance -= amount;
-            return true;
-        } else {
-            throw new AmountOverDrawnException(this);
+    public  Savings(Customer cust, double amount){
+        super();
+        id=cust.getCustomerId()+"";
+        if(amount>=10){
+            setBalance(amount);
         }
     }
     
     /**
-     * Method untuk menghitung bunga sesuai jumlah hari 
+     * metode getter untuk pengambilan bunga
+     * 
+     * @return bunga yang didapatkan
      */
-    public void addDailyInterest(int numOfDays) 
-    {
-        double A, period;
-        period = (double)numOfDays / 365;
-        A = futureValue(balance, 0.03, 360, period);
-        interestEarned = A - balance;
-        balance = A;
-    }
-    
-    
-    /**
-     * Method untuk mendapatkan bunga
-     */
-    public double getInterestEarned() 
-    {
+    public double getInterestEarned(){
         return interestEarned;
     }
+    
+    /**
+     * method untuk menarik balance dari savings
+     * 
+     * @param amount jumalah yang akan ditarik
+     */
+    public void withdraw(double amount)throws AmountOverDrawnException {
+        double checkDrawBalance= balance - amount;
+        if (checkDrawBalance<0||amount<0){
+            throw new AmountOverDrawnException(this);
+        }
+        else{
+            this.balance=balance-amount;
+        }
+    }
+    
+     /**
+       * Method berikut ini menunjukan balance dari akun saving setelah mendapat bunga majemuk 3% selama setahun,
+       * dimana bunga dihitung tiap harinya.
+       * 
+       * @param days hari bunga
+       */
+    public void addDailyInterest(int days){
+        double f= balance*(Math.pow((1+(0.03/365)),(days)));
+        this.interestEarned= f-balance;
+        balance=f;
+    }
+    
 }
