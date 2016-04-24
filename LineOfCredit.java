@@ -1,103 +1,98 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
+import java.math.*;
+import java.text.*;
+
 /**
- * Write a description of class LineOfCredit here.
+ * Kelas LineOfCredit yang berisi method dan variabel yang digunakan.
  * 
  * @author Abdu Halim Wibowo
  * @version 16.04.2016
  */
 public class LineOfCredit extends Checking
 {
-    /**
-     * variabel untuk balance kredit
+    private double creditBalance, creditLimit;
+    
+     /**
+     * Constructor for objects of class LineOfCredit
+     * @param customer adalah objek Customer 
+     * @param amount adalah jumlah saldo checking account
+     * @param creditAmount adalah jumlah nilai limit kredit
      */
-   private double creditBalance;
-   
-   /**
-    * variabel untuk limit dari kredit
-    */
-   private double creditLimit;
-   
-   /**
-    * kontruktor dari kelas LOC
-    * 
-    * @param cust akun customer
-    * @param amount yang akan di masukan
-    * @param creditLimit limit dari kredi yang akan digunakan
-    */
-   public LineOfCredit(Customer cust, double amount, double creditLimit){
-      id=cust.getCustomerId()+"";
-      setCreditLimit(-1*(creditLimit));
-      setBalance(amount);
-   }
-   
-   /**
-    * method untuk menghitung biaya tambahkan dari kredit
-    */
-   public void feeAssessment(){
-       int days = new GregorianCalendar().get(Calendar.DAY_OF_MONTH);
-       double deficit = creditBalance;
-       double amt = deficit * Math.pow((1+ 0.21 / 365),(days));
-       this.monthlyFee = amt -  deficit;
-   }
-   
-   /**
-    * method untuk mengembalikan balance credit
-    * 
-    * @return balance kredit
-    */
-   public double getCreditBalance(){
-       return creditBalance;
-   }
-   
-  /**
-    * method untuk mengembalikan limit kredit
-    * 
-    * @return limit kredit
-    */
-   public double getCreditLimit(){
-       return creditLimit;
-   }
-   
-   /**
-    * method untuk mengeset balance credit
-    * 
-    * @param amount balance kredit
-    */
-   public void setCreditBalance(double amount){
-       creditBalance=amount;
-   }
-   
-   /**
-    * Method untuk melakukan set balance credit
-    * 
-    * @param amount balance kredit
-    */
-   public void setCreditLimit(double amount){
-       creditLimit=amount;
-   }
-   
+    public LineOfCredit (Customer cust, double amount, double creditAmount) {
+        super();
+        id = Integer.toString(cust.getCustID());
+        balance = amount;
+        creditBalance = creditAmount;
+        creditLimit = creditAmount;
+    }
+
+     /**
+     * method untuk melakukan perhitungan biaya kredit
+     */
+    public void feeAssessment() {
+        monthlyFee += 3;
+        balance -= monthlyFee;
+    }
+    
+     /*{
+        int days = new GregorianCalendar ().get(Calendar.DAY_OF_MONTH);
+        double deficit = creditLimit - creditBalance, 
+        period = (double) days/365; 
+        double financeCharge = futureValue(deficit,0.21,360,period);
+        monthlyFee = new BigDecimal(financeCharge).subtract(new BigDecimal(deficit), mc.DECIMAL32).doubleValue();
+    }*/
+    
     /**
-    * Method untuk melakukan Withdraw dari LOC
-    * 
-    * @param amount balance yang diambil
-    */
-   public void withdraw(double amount)throws AmountOverDrawnException{
-       if(amount<=balance){
-           balance -= amount;
-           
-       }
-       else if(amount>balance && creditBalance>creditLimit){
-           creditBalance-=(amount-balance);
-           balance = 0;
-           feeAssessment();
-           
-       }
-       else{
-           throw new AmountOverDrawnException (this);
-       }
-   }
+     * Method yang digunakan untuk menarik saldo
+     */
+    public boolean withdraw (double amount) {
+        if ( ( balance + creditBalance >= amount)) {
+            if (balance >= amount) {
+                balance -= amount;
+            } else {
+                creditBalance -= (amount - balance);
+                balance = 0;
+                feeAssessment();
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * method untuk mendapatkan nilai saldo kredit
+     * @return nilai saldo kredit
+     */
+    public double getCreditBalance () 
+    {
+        return creditBalance;
+    }
+    
+     /**
+     * method untuk mendapatkan nilai limit kredit
+     * @return nilai limit kredit
+     */
+    public double getCreditLimit () 
+    {
+        return creditLimit;
+    }
+    
+    /**
+     * method untuk mengeset nilai saldo kredit
+     * @param amount adalah nilai saldo kredit
+     */
+    public void setCreditBalance (double amount) 
+    {
+        creditBalance = amount;
+    }
+    
+    /**
+     * method untuk mengeset nilai limit pada kredit
+     * @param amount adalah nilai limit kredit
+     */
+    public void setCreditLimit (double amount) 
+    {
+        creditLimit = amount;
+    }
 }

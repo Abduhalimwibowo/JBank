@@ -1,90 +1,84 @@
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.text.ParseException;
+
 /**
- * Write a description of class Investment here.
- * 
+ * Pemodelan kelas Investment yang berisi method dan variabel yang digunakan.
  * @author Abdu Halim Wibowo
- * @version 16.04.2016
+ * @version 24.04.2016
  */
 public final class Investment extends Savings
 {
-    /**
-     * variabel untuk menyimpan data akhir tanggal
-     */
-    private Date endDate;
-    
-    /**
-     * variabel untuk menyimpan data bunga yang di dapatkan
-     */
+    private Date startDate, endDate;
     private double interestRate;
-    
-    /**
-     * variable untuk menyimpan awal pembuatan akun
-     */
-    private Date startDate;
-    
-    /**
-     * variable untuk menyimpan term berapa tabungan tersebut
-     */
     private int term;
-    
-    /**
-     * kontruktor untuk kelas investment
-     * 
-     * @param cust akun customer
-     * @param amount yang akan dimasukkan
-     * @param months berapa bulan
+  
+     /**
+     * Constructor for objects of class Investments
+     * @param customer adalah object dari kelas Customer
+     * @param amount adalah jumlah saldo
+     * @param term adalah periode
      */
-    public Investment(Customer cust, double amount, int months){
+    public Investment(Customer cust, double amount, int term)
+    {
         super(cust, amount);
-        if(months>=0 && months<=6){
-            term=6;
-            interestRate=0.05;
+        this.term = term;
+        int localTerm;
+        Calendar cal = new GregorianCalendar();
+        startDate = cal.getTime();
+        if (term < 6) {
+            localTerm = 6;
+        } else {
+            localTerm = term;
         }
-        else if(months>=6 && months<=12){
-            term=months;
-            interestRate=0.06;
+        cal.add(Calendar.MONTH, localTerm);
+        endDate = cal.getTime();
+
+        if (term <= 6) {
+            interestRate = 0.05;
+        } else if (term > 6 && term <=12) {
+            interestRate = 0.06;
+        } else {
+            interestRate = 0.07;
         }
-        else if(months>=12){
-            term=months;
-            interestRate=0.07;
-        }
-        Calendar s= new GregorianCalendar();
-        startDate=s.getTime();
-        s.add(Calendar.MONTH, term);
-        endDate =s.getTime();
-        
+    }
+
+    /**
+     * method override untuk menambahkan bunga per hari dalam 1 tahun
+     * @param days adalah jumlah hari
+     */
+    @Override
+    public void addDailyInterest(int days)
+    {
+        double A, period;
+        period = (double)days / 365;
+        A = futureValue(balance, interestRate, 360, period);
+        interestEarned = A - balance;
+        balance = A;
     }
     
     /**
-     * metode untuk menghitung bunga
-     * 
-     * @param days hari yang akan dihitung
+     * Method withdraw untuk mengambil uang dari akun 
+     * @param amount adalah jumlah uang yang diambil
      */
-    public void addDailyInterest(int days){
-        double f= balance*(Math.pow((1+(interestRate/365)),(days)));
-        this.interestEarned= f-balance;
-        balance=f;
-    }
-    
-    /**
-     * method untuk menarik balance
-     * 
-     * @param amount jumlah yang ditarik
-     * @return boolean status dari method
-     */
-    public void withdraw(double amount)throws AmountOverDrawnException {
+    public boolean withdraw(double amount) {
         
-        if(amount>=this.getBalance()){
-            if(Calendar.getInstance().before(endDate)==true){
-                //do nothing
+        if (balance - amount >= 100) {
+            if (Calendar.getInstance().before(endDate)) {
+                if ( (balance * 0.8) - amount >= 100 ) {
+                    balance *= 0.8;
+                    balance -= amount;
+                    return true;
+                } else {
+                    return false;
+                }
                 
+            } else {
+                return false;
             }
-        }
-        else{
-            throw new AmountOverDrawnException (this);
-         }
+        } else {
+            return false;
         }
     }
+    
+}

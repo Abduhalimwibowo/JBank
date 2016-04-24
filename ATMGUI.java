@@ -1,139 +1,137 @@
-import javax.swing.*;//Library GUI
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
+
 /**
- * Kelas yang merepresentaskan GUI
- * , Merupakan child dari JFrame
+ * Kelas yang merepresentaskan GUI Merupakan child dari JFrame
  * 
  * @author Abdu Halim Wibowo
  * @version 16.04.2016
  */
-public class ATMGUI extends JFrame
+
+public class ATMGUI extends JPanel
 {
+   private JFrame Frame;
+   private JTextField custIdText, amountText;
+   public JTextArea text;
+   private JLabel custIdLabel, amountLabel;
+   private JButton buttonDeposit ;
+   private JButton buttonWithdraw ;
+   private JButton buttonExit ;
+   private JRadioButton savings ;
+   private JRadioButton investment ;
+   private JRadioButton lineofcredit ;
+   private JRadioButton overdraft ;
+   private ButtonGroup buttonGroup;
+
     /**
-     * variabel-variabel dalam GUI
+     * Constructor bagi objek pada kelas ATMGUI
      */
-    public JLabel customerLabel;
-    public JLabel amountLabel;
-    public JRadioButton tipeAkunSaving;
-    public JRadioButton tipeAkunInvestment;
-    public JRadioButton tipeAkunLineOfCredit;
-    public JRadioButton tipeAkunOverdraft;
-    public JTextField customerText;
-    public JTextField amountText;
-    public JTextArea textAreaMain;
-    public JButton deposit;
-    public JButton withdraw;
-    public JButton exit;
-    public ButtonGroup radioGroup;
-    public ButtonGroup buttonGroup;
-    public JFrame frame;
+     public ATMGUI()
+   {
+       BuildGUI();
+   }
     
     /**
-     * Kontruktor dari kelas ATMGUI
+     * Method untuk membangun GUI 
      */
-    public ATMGUI()
-    {
-        super("ATMGUI"); // Membuat objek Jframe
-        buildGUI();
-        setVisible(true);//Menampilkan GUI
+    private void BuildGUI(){
+       Frame = new JFrame("ATMGUI");
+       Frame.setSize(650,350);
+       
+        Frame.addWindowListener(new WindowHandler() 
+        {
+         public void windowClosing(WindowHandler WindowEvent){
+            System.exit(0);
+         }        
+      });
+      Frame.setVisible(true);
     }
+ 
     
-    /**
-     * Method untuk membangun GUI dengan Metode Nested Panel
-     */
-    public void buildGUI(){
-        //Membuat Container
-        Container contentPane= getContentPane();
-        
-        //Membuat Panel-panel untuk mengelompokkan Komponen
-        JPanel buttonPanel= new JPanel();
-        buttonPanel.setLayout(new BorderLayout());
-        JPanel checkboxPanel= new JPanel();
-        checkboxPanel.setLayout(new BoxLayout(checkboxPanel, BoxLayout.Y_AXIS));
-        JPanel infoPanel= new JPanel();
-        infoPanel.setLayout(new FlowLayout());
-        JPanel textPanel= new JPanel ();
-        textPanel.setLayout(new FlowLayout());
-        JPanel mainPanel= new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        
-        //Membuat Komponen Label
-        customerLabel= new JLabel("Enter Customer ID");
-        amountLabel = new JLabel("Enter amount here:");
-        
-        //Membuat Komponen TextField dan TextArea
-        customerText= new JTextField(10);
-        amountText= new JTextField(15);
-        textAreaMain= new JTextArea(20, 50);
-        textAreaMain.setEditable(false);
-        
-        //Membuat RadioButton
-        tipeAkunSaving = new JRadioButton("Savings");
-        tipeAkunInvestment = new JRadioButton("Investment");
-        tipeAkunLineOfCredit = new JRadioButton("Line Of Credit");
-        tipeAkunOverdraft = new JRadioButton("Overdraft");
-        
-        //Membuat Button
-        deposit= new JButton("Deposit");
-        withdraw= new JButton("Withdraw");
-        exit= new JButton("Exit");
-        
-        //Menambahkan JButton ke ButtonPanel
-        buttonPanel.add(deposit, BorderLayout.PAGE_START);
-        buttonPanel.add(withdraw, BorderLayout.CENTER);
-        buttonPanel.add(exit, BorderLayout.PAGE_END);
-        
-        //Menambahkan JRadioButton ke CheckBoxPanel
-        checkboxPanel.add(tipeAkunSaving);
-        checkboxPanel.add(tipeAkunInvestment);
-        checkboxPanel.add(tipeAkunLineOfCredit);
-        checkboxPanel.add(tipeAkunOverdraft);
-        
-        //Menambahkan Komponen-Komponen ke infoPanel
-        infoPanel.add(customerLabel);
-        infoPanel.add(customerText);
-        infoPanel.add(checkboxPanel);
-        infoPanel.add(amountLabel);
-        infoPanel.add(amountText);
-        
-        //Menambahkan Komponen-Komponen ke textPanel
-        textPanel.add(textAreaMain);
-        textPanel.add(buttonPanel);
-        
-        //Menambahkan Komponen-Komponen ke mainPanel
-        mainPanel.add(infoPanel);
-        mainPanel.add(textPanel); 
-        
-        //menambahkan mainpanel ke Contentpane
-        contentPane.add(mainPanel);
-        
-        //mengatur komponen dalam GUI
-        pack();
-        
-        //Menambahkan Window Listener
-        addWindowListener(new WindowHandler());
-        
-        //Menambahkan ButtonHandler
-        deposit.addActionListener(new ButtonHandler(this));
-        withdraw.addActionListener(new ButtonHandler(this));
-    }
+     public void showATM(){
+       JPanel thePanel = new JPanel();
+       thePanel.setLayout(new BoxLayout(thePanel, BoxLayout.Y_AXIS));
+       
+       custIdLabel = new JLabel("Enter Customer ID :");
+       custIdText = new JTextField(7);
+       amountLabel = new JLabel("Enter Amount here:");
+       amountText = new JTextField(7);
+       savings = new JRadioButton("Savings");
+       investment = new JRadioButton("Investment");
+       lineofcredit = new JRadioButton("Line Of Credit");
+       overdraft = new JRadioButton("Overdraft");
+       JPanel panelType = new JPanel();
+       panelType.setLayout(new BoxLayout(panelType, BoxLayout.Y_AXIS));
+       ButtonGroup buttonGroup = new ButtonGroup();
+       buttonGroup.add(savings);
+       buttonGroup.add(investment);
+       buttonGroup.add(lineofcredit);
+       buttonGroup.add(overdraft);
+       savings.setSelected(true);
+       
+       panelType.add(savings);
+       panelType.add(investment);
+       panelType.add(lineofcredit);
+       panelType.add(overdraft);
+       
+       JPanel infoPanel = new JPanel();
+       infoPanel.setPreferredSize(new Dimension(600, 150));
+       infoPanel.setBorder(BorderFactory.createTitledBorder("Information Account :"));
+       
+       infoPanel.add(custIdLabel);
+       infoPanel.add(custIdText);
+       infoPanel.add(panelType);
+       infoPanel.add(amountLabel);
+       infoPanel.add(amountText);
+       
+       thePanel.add(infoPanel);
+       
+       JPanel buttonPanel = new JPanel();
+       buttonPanel.setLayout(new GridLayout(3,1));
+       
+       buttonDeposit = new JButton("Deposit");
+       buttonWithdraw = new JButton("Withdraw");
+       buttonExit = new JButton("Exit");
+       buttonDeposit.addActionListener(new ButtonHandler(this));
+       buttonWithdraw.addActionListener(new ButtonHandler(this));
+       buttonExit.setActionCommand("Exit");
+       buttonExit.addActionListener(new ButtonHandler(this));
+
+       buttonPanel.add(buttonDeposit, BorderLayout.PAGE_START);
+       buttonPanel.add(buttonWithdraw, BorderLayout.CENTER);
+       buttonPanel.add(buttonExit, BorderLayout.PAGE_END);
+       
+       JPanel textPanel = new JPanel();
+       textPanel.setPreferredSize(new Dimension(800,450));
+       textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.X_AXIS));
+       
+       text = new JTextArea(20, 50);
+       text.setFont(new Font("Times New Roman", Font.BOLD, 12));
+       text.setBackground(Color.white);
+       text.setEditable(false);
+       text.setForeground(Color.black);
+       text.setText("Welcome Dear Customer");
+       
+       JScrollPane scrollText = new JScrollPane (text, 
+       JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+       JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+       
+       textPanel.add(scrollText);
+       textPanel.add(buttonPanel);
+       
+       thePanel.add(textPanel);
+       
+       Frame.add(thePanel);
+       Frame.setVisible(true);
+   }
     
-    /**
-     * Method untuk melakukan return ID yang dituliskan dalam GUI
-     * 
-     * @return ID kustomer
-     */
-    public int getIDcust(){
-        return Integer.parseInt(customerText.getText());
-    }
-    
-     /**
-     * Method untuk melakukan return Nominal yang dituliskan dalam GUI
-     * 
-     * @return Nominal yang ditulis
-     */
-    public double getNominal(){
-        return Double.parseDouble(amountText.getText());
+   public static void main(String[] args)
+   {
+       ATMGUI atm = new ATMGUI();
+       atm.showATM();
     }
     
      /**
@@ -142,15 +140,29 @@ public class ATMGUI extends JFrame
      * @return ID kustomer
      */
     public String getTextArea(){
-        return textAreaMain.getText();
+
+       String textDisplay = text.getText();
+       return textDisplay;
     }
     
-    /**
-     * Method untuk mengeset apa yang akan ditulis di Text Area
+   /**
+     * Method untuk melakukan return ID yang dituliskan dalam GUI
      * 
-     * @param input Text yang akan ditulis dalam TextArea
+     * @return ID kustomer
      */
-    public void setTextArea(String input){
-        textAreaMain.setText(input);
+    public String getIDcostumer(){
+       String id = custIdText.getText();
+       return id;
     }
+    
+     /**
+     * Method untuk melakukan return Nominal yang dituliskan dalam GUI
+     * 
+     * @return Nominal yang ditulis
+     */
+    public String getNominal(){
+       String amount = amountText.getText();
+       return amount;
+    }
+    
 }

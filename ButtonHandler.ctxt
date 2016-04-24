@@ -2,15 +2,7 @@
 comment0.params=gui
 comment0.target=ButtonHandler(ATMGUI)
 comment0.text=\r\n\ Kelas\ Konstruktor\ dari\ Button\ Handler\r\n\ \r\n\ @param\ gui\ Objek\ gui\ yang\ akan\ dijadikan\ parameter.\r\n
-comment1.params=e
+comment1.params=event
 comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
 comment1.text=\r\n\ Method\ untuk\ menghandle\ Event\r\n\ \r\n\ @param\ e\ event\ yang\ dilakukan\r\n
-comment2.params=message
-comment2.target=void\ errorMessage(java.lang.String)
-comment3.params=akun\ amount
-comment3.target=void\ withdrawAction(Account,\ double)
-comment4.params=acctType
-comment4.target=Account\ locateAccount(char)
-comment5.params=
-comment5.target=void\ clearText()
-numComments=6
+numComments=2

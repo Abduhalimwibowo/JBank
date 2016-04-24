@@ -1,5 +1,23 @@
 #BlueJ class context
 comment0.params=args
 comment0.target=void\ main(java.lang.String[])
-comment0.text=\r\n\ Awal\ dari\ Program\r\n
-numComments=1
+comment0.text=\r\n\ Main\ Method\ \r\n
+comment1.params=year\ month\ day\ hour\ min
+comment1.target=void\ setStartTime(int,\ int,\ int,\ int,\ int)
+comment1.text=\r\n\ method\ untuk\ mengeset\ jam\ buka\ bank\r\n\ @param\ int\ hour\ menunjukkan\ jam\r\n\ @param\ int\ min\ menunjukkan\ menit\r\n
+comment2.params=customer
+comment2.target=void\ createNewCustomer(Customer)
+comment2.text={\r\n\ \ \ \ \ \ int\ nextID;\r\n\ \ \ \ \ \ nextID\ \=\ nextCustID;\r\n\ \ \ \ \ \ if\ (nextCustID\ \=\=\ 0)\r\n\ \ \ \ \ \ {\r\n\ \ \ \ \ \ \ \ \ \ lastCustID\ \=\ 1000;\r\n\ \ \ \ \ \ \ \ \ \ numOfCurrentCustomer\ \=\ numOfCurrentCustomer;\r\n\ \ \ \ \ \ \ \ \ \ return\ nextID;\r\n\ \ \ \ \ \ }\r\n\ \ \ \ \ \ else\ if\ (\ numOfCurrentCustomer\ \=\=\ MAX_NUM_OF_CUSTOMERS)\r\n\ \ \ \ \ \ {\ \ \r\n\ \ \ \ \ \ \ \ \ \ return\ 0;\r\n\ \ \ \ \ \ }\r\n\ \ \ \ \ \ else\ if\ (nextCustID\ \!\=\ 0)\r\n\ \ \ \ \ \ {\r\n\ \ \ \ \ \ \ \ \ lastCustID\ \=\ nextCustID;\r\n\ \ \ \ \ \ \ \ \ nextCustID\ +\=\ 1;\r\n\ \ \ \ \ \ \ \ \ numOfCurrentCustomer\ +\=\ 1;\r\n\ \ \ \ \ \ }\r\n\ \ \ \ \ \ return\ nextID;\r\n}
+comment3.params=custId
+comment3.target=Customer\ getCustomer(int)
+comment3.text=\r\n\ method\ untuk\ mengalokasikan\ customer\ ID\ dengan\ object\ customer\r\n\ @param\ custId\r\n
+comment4.params=year\ month\ day\ hour\ min
+comment4.target=void\ setCloseTime(int,\ int,\ int,\ int,\ int)
+comment4.text=\r\n\ method\ setter\ untuk\ jam\ tutup\ bank\r\n\ @param\ int\ hour\ menujukkan\ jam\r\n\ @param\ int\ min\ menunjukkan\ menit\r\n
+comment5.params=
+comment5.target=void\ printTime()
+comment5.text=\r\n\ method\ untuk\ mengeprint\ jam\ operasional\ bank\r\n
+comment6.params=customer
+comment6.target=void\ getAccount(Customer)
+comment6.text=\r\n\ method\ getter\ untuk\ Account\r\n\ @param\ customer\ adalah\ object\ pada\ kelas\ Customer\r\n
+numComments=7

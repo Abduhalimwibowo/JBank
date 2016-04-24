@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.params=akun
+comment0.params=acct
 comment0.target=AmountOverDrawnException(Account)
 comment1.params=
 comment1.target=java.lang.String\ getMessage()
-comment1.text=public\ void\ AmountOverDrawnException(char\ acctType)\r\n\ \ \ \ {\r\n\ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ //\ put\ your\ code\ here\r\n\ \ \ \ \ \ \ \ //return\ x\ +\ y;\r\n}
+comment1.text=\r\n\ method\ override\ sambungan\ pesan\ dari\ main\ method\r\n
 numComments=2

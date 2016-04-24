@@ -1,40 +1,57 @@
 
 /**
- * Write a description of class AccountTypeAlreadyExists here.
+ * Kelas AccountTypeNotFoundException berisi method dan variabel yang digunakan.
  * 
  * @author Abdu Halim Wibowo
- * @version 16.04.2016
+ * @version 20.04.2016
  */
-public class AccountTypeNotFoundException extends java.lang.Exception
+public class AccountTypeNotFoundException extends Exception
 {
-    // instance variables - replace the example below with your own
-    public char akun;
-    public AccountTypeNotFoundException (char akun){
-        super ("Account does not exit");
-        this.akun=akun;
+    public char acctType;
+    public String message;
+    private Account accountType;
+
+    public AccountTypeNotFoundException(char acct)
+    {
+        super("Account not found");
+        acctType = acct;
     }
 
     /**
-     * Constructor for objects of class AccountTypeAlreadyExists
+     * Constructor for objects of class AccountTypeNotFoundException
      */
-    public String getMessage(){
- 
-        String messageOut= "Error!!!";
-        if(this.akun=='S'){
-            messageOut= "Savings";
+    public String getMessage()
+    {
+        switch (acctType)
+        {
+            case 'S':
+            {
+                message = "Savings";
+                return message+super.getMessage();
+            }
+            case 'I':
+            {
+                message = " Investment ";
+                return message+super.getMessage();
+            }
+            case 'L':
+            {
+                message = " LineOfCredit ";
+                return message+super.getMessage();
+            }
+            case 'O':
+            {
+                message = " OverDraftProtection ";
+                return message+super.getMessage();
+            }
+            default :
+            {
+                message = "Try Another Account";
+                return message;
+            }
         }
-        else if (this.akun=='I'){
-            messageOut="Investment";
-        }
-        else if (this.akun=='L'){
-            messageOut="Line-Of-Credit";
-        }
-        else if (this.akun=='O'){
-            messageOut="Overdraft";
-        }
-        return super.getMessage () + messageOut;
     }
-
+    
     /*/**
      * An example of a method - replace this comment with your own
      * 

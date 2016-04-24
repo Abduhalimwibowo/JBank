@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=CustomerFileWriter()
+comment0.text=\r\n\ Konstruktor\ kosong\ kelas\ CustomerFileWriter\r\n
+comment1.params=custs
+comment1.target=void\ saveCustomers(java.util.ArrayList)
+comment1.text=\r\n\ Method\ untuk\ menyimpan\ customer\ dlam\ arraylist\r\n
+numComments=2
