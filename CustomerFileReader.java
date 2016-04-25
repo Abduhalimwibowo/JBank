@@ -1,3 +1,8 @@
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.*;
 import java.util.*;
 
@@ -7,20 +12,47 @@ import java.util.*;
  * @author Abdu Halim Wibowo
  * @version 24.04.2016
  */
-public class CustomerFileReader implements Serializable {
-    private File fileObject;
+public class CustomerFileReader 
+ {
     private FileInputStream fileInputStream;
     private ObjectInputStream objectInputStream;
+    private File objectFile;
+    private File fileObject;
+    //private ObjectInputStream objectInputStream;
 
-    /**
-     * Konstruktor kosong kelas CustomerFileReader
-     */
-   public CustomerFileReader()
-   {
-       
-   }
+  public void readCustomer()
+    {
+        System.out.println("coba");
+        try
+        {
+           System.out.println("coba2");
+           FileInputStream fin = new FileInputStream("abdu.dat");
+		   ObjectInputStream ois = new ObjectInputStream(fin);
+		   System.out.println("akhir");
+		   Object object = ois.readObject();
+		   System.out.println("coba3");
+		   System.out.println(object);
+		   System.out.println("coba4");
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        } 
+        finally 
+        {
 
-    public ArrayList<Customer> readCustomer()  throws IOException, ClassNotFoundException
+        }   
+    }
+
+   /* public ArrayList<Customer> readCustomer()  throws IOException, ClassNotFoundException
    {
    ArrayList<Customer> custs = null;
         try {
@@ -35,6 +67,6 @@ public class CustomerFileReader implements Serializable {
         
         return custs;
         }
-    }
-
+    }*/
+}
 

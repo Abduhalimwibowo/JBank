@@ -12,8 +12,8 @@ import java.util.*;
 public class CustomerFileWriter implements Serializable 
    {
     private File fileObject;
-    private FileOutputStream fileOutputStream;
-    private ObjectOutputStream objectOutputStream;
+    private static FileOutputStream fileOutputStream;
+    private static ObjectOutputStream objectOutputStream;
     
     /**
      * Konstruktor kosong kelas CustomerFileWriter
@@ -25,27 +25,27 @@ public class CustomerFileWriter implements Serializable
     
 
     /**
-     * Method untuk menyimpan customer dlam arraylist
+     * method saveCustomer untuk menyimpan data yang sudah ditulis
      */
-    public void saveCustomers(ArrayList<Customer> custs) throws IOException
+    public void saveCustomers(ArrayList<Customer> custs) 
     {
         try {
-            fileObject = new File("Abdu.dat");
             fileObject.createNewFile();
-            fileOutputStream = new FileOutputStream(fileObject);
+            fileOutputStream = new FileOutputStream("abdu.ser");
             BufferedOutputStream buffer = new BufferedOutputStream(fileOutputStream);
-            objectOutputStream = new ObjectOutputStream(buffer);
-            try{
-                objectOutputStream.writeObject(custs);
+            objectOutputStream.writeObject(custs);
             }
-            finally{
-                objectOutputStream.close();
-            }
-
-            }
-        catch (Exception e) {
+        catch (FileNotFoundException e) {
             System.out.println("There is an Exception  :" + e.getMessage());
-    }
+            } 
+        catch (IOException e) 
+        {
+        }finally 
+        {
+            
+        }    
+   
   }
-}
+ }
+
 

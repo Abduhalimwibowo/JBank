@@ -1,7 +1,4 @@
 #BlueJ class context
 comment0.params=
-comment0.target=CustomerFileReader()
-comment0.text=\r\n\ Konstruktor\ kosong\ kelas\ CustomerFileReader\r\n
-comment1.params=
-comment1.target=java.util.ArrayList\ readCustomer()
-numComments=2
+comment0.target=void\ readCustomer()
+numComments=1
